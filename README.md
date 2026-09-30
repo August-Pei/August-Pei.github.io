@@ -1,4 +1,4 @@
-# August 的个人网站
+# August-Pei.github.io
 
 React + Vite 音乐制作、内容创作与个人履历网站。
 

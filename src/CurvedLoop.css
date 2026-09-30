@@ -1,0 +1,18 @@
+.curved-loop-jacket {
+  width: 100%;
+  touch-action: pan-y;
+}
+
+.curved-loop-svg {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(12px, .65vw, 16px);
+  font-weight: 600;
+  letter-spacing: .2em;
+  line-height: 1;
+  fill: #a8be4e;
+}

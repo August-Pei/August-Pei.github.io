@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Production build output
+dist/
+
+# Local system files
+.DS_Store
+**/.DS_Store
+
+# Local visual QA renders
+*-render.png
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local environment overrides
+.env.local
+.env.*.local
+
+# Local Bilibili export
+bilibili_video_stats.csv
+__pycache__/
+.venv/
+data/.bilibili_cookie

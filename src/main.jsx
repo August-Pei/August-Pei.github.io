@@ -1,3 +1,4 @@
+import ResumeDownload from './ResumeDownload.jsx'
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
@@ -9,6 +10,8 @@ import {
 } from 'lucide-react'
 import './styles.css'
 import './pages.css'
+import defaultContent from './content-defaults.json'
+import { validateContent } from './content-schema.js'
 import TiltedCard from './TiltedCard'
 import VariableProximity from './VariableProximity'
 import ZoomImage from './ZoomImage'
@@ -16,7 +19,10 @@ import CardSwap, { Card } from './CardSwap'
 import CoverflowCarousel from './CoverflowCarousel'
 import RotatingText from './RotatingText'
 import CurvedLoop from './CurvedLoop'
+import SocialChannelMarquee from './SocialChannelMarquee'
+import SkillTags from './SkillTags'
 import useEducationReveal from './useEducationReveal'
+import useFirstViewportEntry from './useFirstViewportEntry'
 import bilibiliLogo from '../Photos/app logos new/哔哩哔哩.png'
 import xiaohongshuLogo from '../Photos/app logos new/小红书.png'
 import xhsWordmark from '../Photos/SVG/xhs.svg'
@@ -32,6 +38,7 @@ import remakeBirds from '../Photos/Contents/Remake/BIRDS OF A FEATHER 4_3.png'
 import motionCover from '../Photos/Contents/Apple Music/Apple Music 动态封面.png'
 import motionStill from '../Photos/Contents/Apple Music/Apple Music 全屏不动态封面.png'
 import motionArtist from '../Photos/Contents/Apple Music/Apple Music 艺术家页面.png'
+import appleMusicAiCover from '../Photos/Contents/Apple Music/AI封面.png'
 import viralBrat from '../Photos/Contents/Viral/BRAT.png'
 import viralMotion from '../Photos/Contents/Viral/Apple Music 动态封面.png'
 import viralArtist from '../Photos/Contents/Viral/Apple Music 艺术家页面.png'
@@ -190,37 +197,10 @@ const nav = [
   ['social', '社交媒体'], ['skills', '技能与爱好'], ['contact', '联系我']
 ]
 
-const musicTracks = [
-  {
-    title: 'Blank Space',
-    artist: 'Taylor Swift (AUGUST REMAKE)',
-    meta: '流行热单还原 · Sound Redesign',
-    src: '/music/Blank Space.mp3',
-    cover: '/albums/wall/35 - 1989.webp',
-    video: 'https://www.bilibili.com/video/BV1xfYT6QEzg/?share_source=copy_web&vd_source=ce498b5e8850e269d4608ac666df0a42',
-    tags: ['Drum Design', 'Layering', 'Synth Design', 'Serum'],
-  },
-  {
-    title: '360',
-    artist: 'Charli xcx (AUGUST REMAKE)',
-    meta: '编曲拆解与全曲还原 · Logic Pro',
-    src: '/music/360.mp3',
-    cover: '/albums/wall/34 - BRAT.webp',
-    video: 'https://www.bilibili.com/video/BV1B1tA6jECs/?share_source=copy_web&vd_source=ce498b5e8850e269d4608ac666df0a42',
-    tags: ['Synth Design', 'Serum', 'Drum Programming', 'Texture Layering'],
-  },
-  {
-    title: 'BIRDS OF A FEATHER',
-    artist: 'Billie Eilish (AUGUST REMAKE)',
-    meta: '编曲拆解与全曲还原 · Logic Pro',
-    src: '/music/BIRDS OF A FEATHER.mp3',
-    cover: '/albums/wall/26 - HIT ME HARD AND SOFT.webp',
-    video: 'https://www.bilibili.com/video/BV1qHut6NEUu/?share_source=copy_web&vd_source=ce498b5e8850e269d4608ac666df0a42',
-    tags: ['Arrangement', 'Guitar Texture', 'Spatial Mix'],
-  },
-]
+let musicWorks = defaultContent.musicWorks
+let musicTracks = musicWorks.filter(track => track.src && !track.placeholder)
 
-const arrangementDetails = [
+const arrangementDetailCards = [
   {
     eyebrow: 'BLANK SPACE · TAYLOR SWIFT',
     title: <>Drum<br/>Layering<span>.</span></>,
@@ -239,7 +219,7 @@ const arrangementDetails = [
     cover: '/albums/wall/34 - BRAT.webp',
     coverAlt: 'Charli xcx 专辑 BRAT 封面',
     quote: '\"I\'m everywhere, I\'m so Julia\"',
-    tags: ['合成器设计', 'Serum'],
+    tags: ['Synth Design', 'Serum'],
     tone: 'three-sixty',
     href: '#synth-design',
   },
@@ -252,9 +232,11 @@ const arrangementDetails = [
     quote: 'A new detail is still taking shape.',
     tags: ['ARRANGEMENT', '空间混音'],
     tone: 'birds',
+    hidden: true, // Set to false to restore this card and its carousel navigation.
     href: musicTracks[2].video,
   },
 ]
+const arrangementDetails = arrangementDetailCards.filter(detail => !detail.hidden)
 
 const DRUM_LAYERING_BPM = 96
 const DRUM_LAYERING_BARS = 8
@@ -452,7 +434,6 @@ const getStrengths = total => [
 ]
 
 const FOLLOWER_CHART = { width: 760, height: 236, left: 58, right: 0, top: 20, bottom: 18 }
-const VIEWS_CHART_TICKS = [600000, 550000, 500000, 450000]
 
 function makeSmoothChartPath(points) {
   if (!points.length) return ''
@@ -543,7 +524,7 @@ const strengthStories = [
     lead: '浙江大学计算机本硕背景，让我具备扎实的知识基础与快速学习的能力。从生成式 AI 研究到 Agent 工作流实践，我把对技术的理解，转化为分析问题、验证想法与推进工作的能力。',
     points: [
       { label: 'ACADEMIC EXCELLENCE', value: '专业第一 · 两次国奖', text: '浙江大学软件工程本科 GPA 3.98 / 4.0，专业排名 1 / 85，推免攻读计算机科学与技术硕士。' },
-      { label: 'AIGC RESEARCH & PRACTICE', value: '模型理解', text: '研究 AIGC 与 Diffusion，代表作 SNR-Edit 录用于 ACM MM 2026；在腾讯优图实验室参与百万级图像生成与质量评估。' },
+      { label: 'AIGC RESEARCH & PRACTICE', value: 'AI 科研与实践背景', text: '研究 AIGC 与 Diffusion，代表作 SNR-Edit 录用于 ACM MM 2026；在腾讯优图实验室参与百万级图像生成与质量评估。' },
       { label: 'AGENT WORKFLOWS', value: '熟练掌握 Agent 协作', text: '将 WorkBuddy、Codex 等工具用于研究实验、代码开发与资料整理，把重复任务组织成自动化流程，提升工作效率。' },
     ],
     note: '技术能力是在持续学习和研究中积累起来的。',
@@ -638,29 +619,7 @@ const courseRecords = {
   ],
 }
 
-const audienceProfiles = {
-  bilibili: {
-    name: '哔哩哔哩',
-    age: [['0–16', '10.3%'], ['16–25', '49.7%'], ['25–40', '30.3%'], ['>40', '9.7%']],
-    gender: [['女性', '10.8%'], ['男性', '89.2%']],
-    regions: [['广东', '11.6%'], ['上海', '9.2%'], ['江苏', '7.5%'], ['四川', '6.4%'], ['浙江', '5.8%']],
-    interests: ['音乐', '欧美音乐', 'Apple Music', '欧美歌手', '编曲', '视觉设计'],
-  },
-  rednote: {
-    name: '小红书',
-    age: [['<18', '12%'], ['18–24', '45%'], ['25–34', '27%'], ['35-44', '7%'], ['>44', '6%']],
-    gender: [['女性', '26%'], ['男性', '74%']],
-    regions: [['上海', '9%'], ['杭州', '8%'], ['北京', '5%'], ['天津', '4%'], ['成都', '3%']],
-    interests: ['音乐', '欧美音乐', 'Apple Music', '编曲', '生活方式', '科技数码'],
-  },
-  tiktok: {
-    name: 'TikTok',
-    age: [['18–24', '39.7%'], ['25–34', '43.4%'], ['35–44', '10.3%'], ['45-54', '5.0%'], ['>55', '1.6%']],
-    gender: [['女性', '40%'], ['男性', '59%'], ['其他', '1%']],
-    regions: [['美国', '31.8%'], ['墨西哥', '14.0%'], ['巴西', '8.6%'], ['日本', '6.0%'], ['越南', '5.8%']],
-    interests: ['Music', 'Pop Music', 'Apple Music', 'Music Production', 'Visual Design'],
-  },
-}
+let audienceProfiles = defaultContent.audienceProfiles
 
 const platformDefinitions = [
   {
@@ -766,9 +725,10 @@ const socialContentPillars = [
     { title: 'BIRDS OF A FEATHER', image: remakeBirds, url: 'https://www.bilibili.com/video/BV1qHut6NEUu/?spm_id_from=333.1387.upload.video_card.click' },
   ] },
   { no: '02', dataKey: 'apple_music', label: 'APPLE MUSIC', title: 'Apple Music 音乐 & 设计', text: '呈现 Apple Music 的设计审美，追踪 Apple Music 最新功能，把音乐与视觉审美相结合。', works: [
-    { title: 'Apple Music 动态封面', image: motionCover, wide: true, url: '' },
-    { title: 'Apple Music 静态封面', image: motionStill, url: '' },
-    { title: 'Apple Music 艺术家页面', image: motionArtist, wide: true, url: '' },
+    { title: 'Apple Music 动态封面', image: motionCover, wide: true, url: 'https://www.bilibili.com/video/BV1bNzZBkELC' },
+    { title: 'Apple Music 静态封面', image: motionStill, url: 'https://www.bilibili.com/video/BV1iRAEzuEaB' },
+    { title: 'Apple Music 艺术家页面', image: motionArtist, wide: true, url: 'https://www.bilibili.com/video/BV1b5Yr6SEn1' },
+    { title: 'Apple Music AI 封面', image: appleMusicAiCover, wide: true, url: 'https://www.bilibili.com/video/BV1TSeu68Eb2' },
   ] },
   { no: '03', label: 'VOCAL COVER', title: '翻唱', text: '以声音演绎拓展内容形态，第一支翻唱作品正在筹备中。', views: 0, engagement: 0, works: [
     { title: '首支翻唱 · 筹备中', image: null, url: '' },
@@ -815,125 +775,56 @@ const skillGroups = [
   { title: '编程', image: skillCodingImage, items: ['Python', 'PyTorch', 'C/C++', '前端', '数据库'] },
 ]
 
-const skillImageCache = []
-function preloadSkillImages() {
-  if (skillImageCache.length) return
-  skillGroups.forEach(({ image: src }) => {
+const preloadedImages = new Map()
+function preloadImages(sources) {
+  return Promise.all([...new Set(sources.filter(Boolean))].map(src => {
+    if (preloadedImages.has(src)) return preloadedImages.get(src).promise
     const image = new Image()
-    image.src = src
-    image.decode?.().catch(() => {})
-    skillImageCache.push(image)
-  })
+    const promise = new Promise(resolve => {
+      image.onload = image.onerror = () => {
+        image.onload = image.onerror = null
+        resolve()
+      }
+      image.loading = 'eager'
+      image.decoding = 'async'
+      image.src = src
+    })
+    preloadedImages.set(src, { image, promise })
+    return promise
+  }))
 }
 
-const recentAlbums = [
-  { title: 'Lost Weekend', subtitle: 'Phoebe Bridgers', src: '/albums/recent/Lost Weekend.webp', alt: 'Lost Weekend 专辑封面' },
-  { title: 'West End Girl', subtitle: 'Lily Allen', src: '/albums/recent/West End Girl.webp', alt: 'West End Girl 专辑封面' },
-  { title: 'Day and Night', subtitle: 'Carly Rae Jepsen', src: '/albums/recent/Day and Night.webp', alt: 'Day and Night 专辑封面' },
-  { title: 'Bass Persuades', subtitle: 'Miley Cyrus', src: '/albums/recent/Bass Persuades.webp', alt: 'Bass Persuades 专辑封面' },
-  { title: 'Location', subtitle: 'She Her Her Hers', src: '/albums/recent/Location.webp', alt: 'Location 专辑封面' },
-  { title: 'We Are', subtitle: 'Jon Batiste', src: '/albums/recent/We Are.webp', alt: 'We Are 专辑封面' },
-  { title: 'Women in Music Pt. III', subtitle: 'HAIM', src: '/albums/recent/Women in Music Pt. III.webp', alt: 'Women in Music Pt. III 专辑封面' },
-  { title: 'you seem pretty sad for a girl so in love', subtitle: 'Olivia Rodrigo', src: '/albums/recent/you seem pretty sad for a girl so in love.webp', alt: 'you seem pretty sad for a girl so in love 专辑封面' },
-  { title: 'The Life of a Showgirl: The Encore', subtitle: 'Taylor Swift', src: '/albums/recent/The Life of a Showgirl - The Encore.webp', alt: 'The Life of a Showgirl - The Encore 专辑封面' },
-  { title: 'Oh yeah?', subtitle: 'Steve Lacy', src: '/albums/recent/Oh yeah.webp', alt: 'Oh yeah? 专辑封面' },
-  { title: 'PRIMA', subtitle: 'ADÉLA', src: '/albums/recent/PRIMA.webp', alt: 'PRIMA 专辑封面' },
-]
+let socialImagesPromise
+function preloadSocialImages() {
+  socialImagesPromise ??= preloadImages([
+    socialAvatar,
+    xhsWordmark,
+    ...socialChannels.map(channel => channel.icon),
+    ...socialContentPillars.flatMap(pillar => pillar.works.map(work => work.image)),
+    ...socialViralWorks.map(work => work.image),
+  ])
+  return socialImagesPromise
+}
+
+let workImagesPromise
+function preloadWorkImages() {
+  workImagesPromise ??= preloadImages(musicWorks.map(work => work.cover))
+  return workImagesPromise
+}
+
+let skillImagesPromise
+function preloadSkillImages() {
+  skillImagesPromise ??= preloadImages(skillGroups.map(group => group.image))
+  return skillImagesPromise
+}
+
+let recentAlbums = defaultContent.recentAlbums
 
 // 专辑墙按每行 10 张排列；01—10 为第一行，11—20 为第二行，以此类推。
-const albumWall = [
-  { id: "01", title: "The Secret of Us - Gracie Abrams", src: "/albums/wall/01 - The Secret of Us.webp" },
-  { id: "02", title: "The Secret of Us - Gracie Abrams", src: "/albums/wall/02 - Fancy That.webp" },
-  { id: "03", title: "DeBÍ TiRAR MáS FOToS - Bad Bunny", src: "/albums/wall/03 - DtMF.webp" },
-  { id: "04", title: "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO? - Billie Eilish", src: "/albums/wall/04 - WHEN WE ALL FALL ASLEEP.webp" },
-  { id: "05", title: "Did you know that there's a tunnel under Ocean Blvd - Lana Del Rey", src: "/albums/wall/05 - Did You Know That There's a Tunnel Under Ocean Blvd.webp" },
-  { id: "06", title: "evermore - Taylor Swift", src: "/albums/wall/06 - evermore.webp" },
-  { id: "07", title: "ARIRANG - BTS", src: "/albums/wall/07 - ARIRANG.webp" },
-  { id: "08", title: "After Hours - The Weeknd", src: "/albums/wall/08 - After Hours.webp" },
-  { id: "09", title: "The Fame Monster - Lady Gaga", src: "/albums/wall/09 - The Fame Monster.webp" },
-  { id: "10", title: "MASSEDUCTION - St. Vincent", src: "/albums/wall/10 - MASSEDUCTION.webp" },
-  { id: "11", title: "GUTS - Olivia Rodrigo", src: "/albums/wall/11 - GUTS.webp" },
-  { id: "12", title: "25 - Adele", src: "/albums/wall/12 - 25.webp" },
-  { id: "13", title: "Man's Best Friend - Sabrina Carpenter", src: "/albums/wall/13 - Man’s Best Friend.webp" },
-  { id: "14", title: "West End Girl - Lily Allen", src: "/albums/wall/14 - West End Girl.webp" },
-  { id: "15", title: "Imaginal Disk - Magdalena Bay", src: "/albums/wall/15 - Imaginal Disk.webp" },
-  { id: "16", title: "Your Name. - RADWIMPS", src: "/albums/wall/16 - Your Name..webp" },
-  { id: "17", title: "Sweetener - Ariana Grande", src: "/albums/wall/17 - Sweetener.webp" },
-  { id: "18", title: "Bloom - Troye Sivan", src: "/albums/wall/18 - Bloom.webp" },
-  { id: "19", title: "Midnights - Taylor Swift", src: "/albums/wall/19 - Midnights.webp" },
-  { id: "20", title: "陪我歌唱(苏打绿版) - 苏打绿", src: "/albums/wall/20 - 陪我歌唱(苏打绿版).webp" },
-  { id: "21", title: "Bewitched - Laufey", src: "/albums/wall/21 - Bewitched.webp" },
-  { id: "22", title: "My Beautiful Dark Twisted Fantasy - Kanye West", src: "/albums/wall/22 - My Beautiful Dark Twisted Fantasy.webp" },
-  { id: "23", title: "E•MO•TION - Carly Rae Jepsen", src: "/albums/wall/23 - Emotion.webp" },
-  { id: "24", title: "Golden Hour - Kacey Musgraves", src: "/albums/wall/24 - Golden Hour.webp" },
-  { id: "25", title: "Blonde - Frank Ocean", src: "/albums/wall/25 - Blonde.webp" },
-  { id: "26", title: "HIT ME HARD AND SOFT - Billie Eilish", src: "/albums/wall/26 - HIT ME HARD AND SOFT.webp" },
-  { id: "27", title: "Norman Fucking Rockwell! - Lana Del Rey", src: "/albums/wall/27 - Norman Fucking Rockwell!.webp" },
-  { id: "28", title: "Lemonade - Beyoncé", src: "/albums/wall/28 - Lemonade.webp" },
-  { id: "29", title: "SOUR - Olivia Rodrigo", src: "/albums/wall/29 - SOUR.webp" },
-  { id: "30", title: "Scarlet - Doja Cat", src: "/albums/wall/30 - Scarlet.webp" },
-  { id: "31", title: "Music, Fashion, Film - Charli xcx", src: "/albums/wall/31 - Music, Fashion, Film.webp" },
-  { id: "32", title: "Hounds of Love - Kate Bush", src: "/albums/wall/32 - Hounds of Love.webp" },
-  { id: "33", title: "SOS - SZA", src: "/albums/wall/33 - SOS.webp" },
-  { id: "34", title: "BRAT - Charli xcx", src: "/albums/wall/34 - BRAT.webp" },
-  { id: "35", title: "1989 - Taylor Swift", src: "/albums/wall/35 - 1989.webp" },
-  { id: "36", title: "eternal sunshine - Ariana Grande", src: "/albums/wall/36 - eternal sunshine.webp" },
-  { id: "37", title: "MAYHEM - Lady Gaga", src: "/albums/wall/37 - MAYHEM.webp" },
-  { id: "38", title: "Blue - Joni Mitchell", src: "/albums/wall/38 - Blue.webp" },
-  { id: "39", title: "Interstellar - Hans Zimmer", src: "/albums/wall/39 - Interstellar.webp" },
-  { id: "40", title: "EUSEXUA - FKA twigs", src: "/albums/wall/40 - EUSEXUA.webp" },
-  { id: "41", title: "Speak Now (Taylor's Version) - Taylor Swift", src: "/albums/wall/41 - Speak Now.webp" },
-  { id: "42", title: "Addison - Addison Rae", src: "/albums/wall/42 - Addison.webp" },
-  { id: "43", title: "冀西南林路行 - 万能青年旅店", src: "/albums/wall/43 - 冀西南林路行.webp" },
-  { id: "44", title: "The Dark Side of the Moon - Pink Floyd", src: "/albums/wall/44 - The Dark Side of the Moon.webp" },
-  { id: "45", title: "RENAISSANCE - Beyoncé", src: "/albums/wall/45 - RENAISSANCE.webp" },
-  { id: "46", title: "you seem pretty sad for a girl so in love - Olivia Rodrigo", src: "/albums/wall/46 - you seem pretty sad for a girl so in love.webp" },
-  { id: "47", title: "纯妹妹 - 单依纯", src: "/albums/wall/47 - 纯妹妹.webp" },
-  { id: "48", title: "Something Beautiful - Miley Cyrus", src: "/albums/wall/48 - Something Beautiful.webp" },
-  { id: "49", title: "新的心跳 - G.E.M.邓紫棋", src: "/albums/wall/49 - 新的心跳.webp" },
-  { id: "50", title: "Carrie & Lowell - Sufjan Stevens", src: "/albums/wall/50 - Carrie & Lowell.webp" },
-  { id: "51", title: "CONFESSIONS II - Madonna", src: "/albums/wall/51 - CONFESSIONS II.webp" },
-  { id: "52", title: "Elvis Presley - Elvis Presley", src: "/albums/wall/52 - Elvis Presley.webp" },
-  { id: "53", title: "The Rise and Fall of a Midwest Princess - Chappell Roan", src: "/albums/wall/53 - The Rise and Fall of a Midwest Princess.webp" },
-  { id: "54", title: "Melodrama - Lorde", src: "/albums/wall/54 - Melodrama.webp" },
-  { id: "55", title: "LUX - ROSALÍA", src: "/albums/wall/55 - LUX.webp" },
-  { id: "56", title: "Short n' Sweet - Sabrina Carpenter", src: "/albums/wall/56 - Short n' Sweet.webp" },
-  { id: "57", title: "folklore - Taylor Swift", src: "/albums/wall/57 - folklore.webp" },
-  { id: "58", title: "Lost Weekend - Phoebe Bridgers", src: "/albums/wall/58 - Lost Weekend.webp" },
-  { id: "59", title: "The Miseducation of Lauryn Hill - Lauryn Hill", src: "/albums/wall/59 - The Miseducation of Lauren Hill.webp" },
-  { id: "60", title: "THAT'S SHOWBIZ BABY! - JADE", src: "/albums/wall/60 - THAT's SHOWBBIZ BABY!.webp" },
-  { id: "61", title: "Planet Her - Doja Cat", src: "/albums/wall/61 - Planet Her.webp" },
-  { id: "62", title: "thank u, next - Ariana Grande", src: "/albums/wall/62 - thank u, next.webp" },
-  { id: "63", title: "Dawn FM - The Weeknd", src: "/albums/wall/63 - Dawn FM.webp" },
-  { id: "64", title: "无与伦比的美丽(苏打绿版) - 苏打绿", src: "/albums/wall/64 - 无与伦比的美丽(苏打绿版).webp" },
-  { id: "65", title: "÷ - Ed Sheeran", src: "/albums/wall/65 - Divide.webp" },
-  { id: "66", title: "The Art of Loving - Olivia Dean", src: "/albums/wall/66 - The Art of Loving.webp" },
-  { id: "67", title: "Teenage Dream - Katy Perry", src: "/albums/wall/67 - Teenage Dream.webp" },
-  { id: "68", title: "VILLAIN - 朱婧汐", src: "/albums/wall/68 - VILLAIN.webp" },
-  { id: "69", title: "Virgin - Lorde", src: "/albums/wall/69 - Virgin.webp" },
-  { id: "70", title: "Future Nostalgia - Dua Lipa", src: "/albums/wall/70 - future nostalgia.webp" },
-  { id: "71", title: "Lover - Taylor Swift", src: "/albums/wall/71 - Lover.webp" },
-  { id: "72", title: "最后的水族馆 - 裘德", src: "/albums/wall/72 - 最后的水族馆.webp" },
-  { id: "73", title: "COWBOY CARTER - Beyoncé", src: "/albums/wall/73 - COWBOY CARTER.webp" },
-  { id: "74", title: "ARTPOP - Lady Gaga", src: "/albums/wall/74 - Artpop.webp" },
-  { id: "75", title: "Deeper Well - Kacey Musgraves", src: "/albums/wall/75 - Deeper Well.webp" },
-  { id: "76", title: "The Complete Recordings - Robert Johnson", src: "/albums/wall/76 - The Complete Recordings.webp" },
-  { id: "77", title: "To Pimp a Butterfly - Kendrick Lamar", src: "/albums/wall/77 - To Pimp a Butterfly.webp" },
-  { id: "78", title: "The Tortured Poets Department - Taylor Swift", src: "/albums/wall/78 - The Tortured Poets Department.webp" },
-  { id: "79", title: "THIS MUSIC MAY CONTAIN HOPE. - RAYE", src: "/albums/wall/79 - THIS MUSIC MAY CONTAIN HOPE..webp" },
-  { id: "80", title: "Come Away with Me - Norah Jones", src: "/albums/wall/80 - Come Away with Me.webp" },
-]
+let albumWall = defaultContent.albumWall
 
-const albumImageCache = []
 function preloadAlbumImages() {
-  if (albumImageCache.length) return
-  ;[...albumWall, ...recentAlbums].forEach(({ src }) => {
-    const image = new Image()
-    image.loading = 'eager'
-    image.decoding = 'async'
-    image.src = src
-    albumImageCache.push(image)
-  })
+  return preloadImages([...albumWall, ...recentAlbums].map(album => album.src))
 }
 
 function CounterWheelNumber({ motionValue, number, height }) {
@@ -983,6 +874,14 @@ function ViralCardMetrics({ metrics }) {
       <b>{metrics.available ? formatMetric(value) : '—'}</b>
     </span>)}
   </span>
+}
+
+function ViralTextVariants({ works, activeIndex, children }) {
+  return works.map((work, index) => <span
+    className={`viral-text-variant${index === activeIndex ? ' is-active' : ''}`}
+    aria-hidden={index !== activeIndex}
+    key={work.no}
+  >{children(work)}</span>)
 }
 
 function ViralWorksShowcase({ works }) {
@@ -1084,11 +983,19 @@ function ViralWorksShowcase({ works }) {
       </div>
       <div className="viral-detail" key={activeWork.no}>
         <p className="viral-detail-label">{activeWork.label}</p>
-        <h4>{(activeWork.titleLines || [activeWork.title]).map((line, index) => <React.Fragment key={line}>{index > 0 && <br />}{line}</React.Fragment>)}</h4>
-        <p className="viral-detail-description">{activeWork.description}</p>
+        <h4 className="viral-text-slot"><ViralTextVariants works={works} activeIndex={activeIndex}>
+          {work => (work.titleLines || [work.title]).map((line, index) => <React.Fragment key={line}>{index > 0 && <br />}{line}</React.Fragment>)}
+        </ViralTextVariants></h4>
+        <p className="viral-detail-description viral-text-slot"><ViralTextVariants works={works} activeIndex={activeIndex}>
+          {work => work.description}
+        </ViralTextVariants></p>
         <div className="viral-detail-meta">
-          <span>核心标签</span><b>{activeWork.coreTags.join(' · ')}</b>
-          <span>发布平台</span><b>{activeWork.metrics.platforms}</b>
+          <span>核心标签</span><b className="viral-text-slot"><ViralTextVariants works={works} activeIndex={activeIndex}>
+            {work => work.coreTags.join(' · ')}
+          </ViralTextVariants></b>
+          <span>发布平台</span><b className="viral-text-slot"><ViralTextVariants works={works} activeIndex={activeIndex}>
+            {work => work.metrics.platforms}
+          </ViralTextVariants></b>
         </div>
         <div className="viral-detail-stats">
           <div><strong>{activeWork.metrics.available ? <MetricValue value={activeWork.metrics.views} /> : '—'}</strong><span>播放量</span></div>
@@ -1123,9 +1030,34 @@ function ViralWorksShowcase({ works }) {
   </div>
 }
 
-function ContentLineFolder({ item }) {
-  const [open, setOpen] = useState(false)
+function ContentLineFolderGrid({ items }) {
+  const [openFolder, setOpenFolder] = useState(null)
+  const gridRef = useRef(null)
 
+  useEffect(() => {
+    if (openFolder === null) return
+    const onOutsideClick = event => {
+      const target = event.target instanceof Element
+        ? event.target.closest('.folder-front, .folder-work')
+        : null
+      if (target && gridRef.current?.contains(target)) return
+      setOpenFolder(null)
+    }
+    document.addEventListener('click', onOutsideClick, true)
+    return () => document.removeEventListener('click', onOutsideClick, true)
+  }, [openFolder])
+
+  return <div className="content-line-grid" ref={gridRef}>
+    {items.map(item => <ContentLineFolder
+      item={item}
+      key={item.no}
+      open={openFolder === item.no}
+      onToggle={() => setOpenFolder(current => current === item.no ? null : item.no)}
+    />)}
+  </div>
+}
+
+function ContentLineFolder({ item, open, onToggle }) {
   return <article className={`content-line-card${open ? ' is-open' : ''}`}>
     <div className="content-line-folder">
       <div className="folder-back folder-hover-target" aria-hidden="true" />
@@ -1145,8 +1077,8 @@ function ContentLineFolder({ item }) {
         </a>)}
       </div>
       <button className="folder-front folder-hover-target" type="button" aria-label={`${open ? '收起' : '展开'}${item.title}文件夹`} aria-expanded={open} onClick={event => {
-        if (event.detail === 0 || window.matchMedia('(hover: none)').matches) setOpen(value => !value)
-      }} onBlur={() => setOpen(false)}>
+        if (event.detail === 0 || window.matchMedia('(hover: none), (pointer: coarse)').matches) onToggle()
+      }}>
         <span className="folder-front-top"><span>{item.label}</span><span>{item.no} / 03</span></span>
         <span className="folder-front-bottom">
           <span className="folder-front-stat" aria-label={`观看量 ${formatMetric(item.views)}`}><Eye size={17} strokeWidth={1.6}/><span>{formatMetric(item.views)}</span></span>
@@ -1164,6 +1096,7 @@ function App({ initialSocialData }) {
     return nav.some(([id]) => id === current) || ['drum-layering', 'synth-design'].includes(current) ? current : 'home'
   }
   const [page, setPage] = useState(getPage)
+  const [imageLoadStage, setImageLoadStage] = useState('social')
   const [currentTrackIndex, setCurrentTrackIndex] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -1278,20 +1211,25 @@ function App({ initialSocialData }) {
     image.src = '/portrait.webp'
     image.decode?.().catch(() => {})
     heroImagePreload.current = image
-    preloadAlbumImages()
   }, [])
   useEffect(() => {
-    if (page === 'skills') {
-      preloadSkillImages()
-      return
+    let cancelled = false
+    async function preloadPageImages() {
+      // Finish each batch before starting the next, including on direct #skills visits.
+      await preloadSocialImages()
+      if (cancelled) return
+      setImageLoadStage('works')
+      await preloadWorkImages()
+      if (cancelled) return
+      setImageLoadStage('skills')
+      await preloadSkillImages()
+      if (cancelled) return
+      setImageLoadStage('albums')
+      preloadAlbumImages()
     }
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(preloadSkillImages, { timeout: 2500 })
-      return () => window.cancelIdleCallback(id)
-    }
-    const id = window.setTimeout(preloadSkillImages, 1500)
-    return () => window.clearTimeout(id)
-  }, [page])
+    preloadPageImages()
+    return () => { cancelled = true }
+  }, [])
   useEffect(() => {
     if (!window.location.hash) history.replaceState(null, '', '#home')
     const onHashChange = () => {
@@ -1399,6 +1337,7 @@ function App({ initialSocialData }) {
     const wheelDelta = event => event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1)
 
     const onOverviewWheel = event => {
+      if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return
       if (event.defaultPrevented || event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return
       const delta = wheelDelta(event)
       const pageTop = pageScroller.scrollTop
@@ -1420,6 +1359,7 @@ function App({ initialSocialData }) {
     }
 
     const onOuterWheel = event => {
+      if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return
       if (event.defaultPrevented || event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX) || overview.contains(event.target)) return
       const delta = wheelDelta(event)
       const pageTop = pageScroller.scrollTop
@@ -1547,6 +1487,7 @@ function App({ initialSocialData }) {
   }
 
   const playNext = () => {
+    if (!musicTracks.length) return
     setCurrentTrackIndex(index => ((index ?? -1) + 1) % musicTracks.length)
     setCurrentTime(0)
     setDuration(0)
@@ -1582,14 +1523,14 @@ function App({ initialSocialData }) {
     return () => window.clearTimeout(timer)
   }, [isPlayerClosing])
 
-  const currentTrack = musicTracks[currentTrackIndex ?? 0]
+  const currentTrack = musicTracks[currentTrackIndex ?? 0] || {}
   const socialData = initialSocialData || fallbackSocialData
   const totalSocial = socialData.total || fallbackSocialData.total
   const followerChart = buildFollowerChart(socialData.follower_growth?.total)
   const followerGrowthLabel = followerChart?.growthRate == null
     ? '—'
     : `${followerChart.growthRate > 0 ? '+' : ''}${followerChart.growthRate.toFixed(1)}%`
-  const viewsChart = buildFollowerChart(socialData.follower_growth?.total, 'views', VIEWS_CHART_TICKS)
+  const viewsChart = buildFollowerChart(socialData.follower_growth?.total, 'views')
   const viewsGrowthLabel = viewsChart?.growthRate == null
     ? '—'
     : `${viewsChart.growthRate > 0 ? '+' : ''}${viewsChart.growthRate.toFixed(1)}%`
@@ -1717,7 +1658,7 @@ function App({ initialSocialData }) {
           <p className="hero-role">制作编曲 <i>/</i> AIGC 音乐 <i>/</i> 音乐内容运营</p>
           <div className="hero-actions">
             <a className="primary" href="#works">查看作品 <ArrowUpRight size={18}/></a>
-            <a className="text-link" href="/resume/制作岗个人简历Ver1.docx" download>下载简历 <ArrowDown size={16}/></a>
+            <ResumeDownload className="text-link">下载简历 <ArrowDown size={16}/></ResumeDownload>
           </div>
         </div>
         <TiltedCard className="hero-photo" rotateAmplitude={1} scaleOnHover={1.01} showTooltip={false}>
@@ -1839,26 +1780,25 @@ function App({ initialSocialData }) {
             <p className="works-intro">从经典热单的精确复刻，到 AIGC 辅助的原创探索。<br/>从 Remake 到 Original，持续探索制作的边界。</p>
           </div>
           <div className="work-list">
-            {musicTracks.map((track, index) => <Work
-              key={track.title}
-              no={`0${index + 1}`}
-              {...track}
-              active={currentTrackIndex === index}
-              isPlaying={isPlaying}
-              onToggle={() => toggleTrack(index)}
-            />)}
-            <Work
-              no="04"
-              title="AIGC ORIGINAL PROJECTS"
-              artist="AUGUST × SUNO"
-              tags={['Suno', 'Prompt Design', 'AI Arrangement', 'DAW Rebuild', 'Sound Selection']}
-              color="blue"
-              placeholder
-            />
+            {musicWorks.map((track, index) => {
+              const playableIndex = musicTracks.findIndex(item => item.id === track.id)
+              return <Work
+                key={track.id}
+                imagesEnabled={imageLoadStage !== 'social'}
+                no={String(index + 1).padStart(2, '0')}
+                {...track}
+                placeholder={!!track.placeholder}
+                playable={playableIndex >= 0}
+                active={playableIndex >= 0 && currentTrackIndex === playableIndex}
+                isPlaying={isPlaying}
+                onToggle={() => playableIndex >= 0 && toggleTrack(playableIndex)}
+              />
+            })}
+            {!musicWorks.length && <p className="works-note">作品正在整理中。</p>}
           </div>
-          <div className="works-note"><Sparkles size={16}/> AIGC 原创音乐企划持续制作中，完成后将在这里开放试听。</div>
+          {musicWorks.some(track => track.placeholder) && <div className="works-note"><Sparkles size={16}/> 更多音乐企划持续制作中，完成后将在这里开放试听。</div>}
         </div>
-        <ArrangementDetails />
+        <ArrangementDetails imagesEnabled={imageLoadStage !== 'social'} />
       </section>}
 
       {page === 'drum-layering' && <DrumLayeringPage />}
@@ -1893,23 +1833,21 @@ function App({ initialSocialData }) {
               <div><strong><MetricValue value={totalSocial.engagement} /></strong><span>总互动量</span></div>
               <div><strong>{engagementRate}<sup>%</sup></strong><span>平均互动率</span></div>
             </div>
-            <div className="social-channel-marquee" aria-label="August 的社交媒体账号">
-              <div className="social-channel-track">
-                {[...socialChannels, ...socialChannels].map((channel, index) => <TiltedCard
-                  className="social-channel-tilt"
-                  rotateAmplitude={3.8}
-                  scaleOnHover={1.04}
-                  showTooltip={false}
-                  key={`${channel.name}-${index}`}
-                >
-                  <a className="social-channel-card" href={channel.url} target="_blank" rel="noreferrer" aria-hidden={index >= socialChannels.length} tabIndex={index >= socialChannels.length ? -1 : undefined}>
-                    <img src={channel.icon} alt="" />
-                    <div><span>{channel.name}</span><strong>{channel.id}</strong></div>
-                    <small>访问账号 <ArrowUpRight size={14}/></small>
-                  </a>
-                </TiltedCard>)}
-              </div>
-            </div>
+            <SocialChannelMarquee count={socialChannels.length}>
+              {[...socialChannels, ...socialChannels].map((channel, index) => <TiltedCard
+                className="social-channel-tilt"
+                rotateAmplitude={3.8}
+                scaleOnHover={1.04}
+                showTooltip={false}
+                key={`${channel.name}-${index}`}
+              >
+                <a className="social-channel-card" href={channel.url} target="_blank" rel="noreferrer" aria-hidden={index >= socialChannels.length} tabIndex={index >= socialChannels.length ? -1 : undefined}>
+                  <img src={channel.icon} alt="" draggable="false" />
+                  <div><span>{channel.name}</span><strong>{channel.id}</strong></div>
+                  <small>访问账号 <ArrowUpRight size={14}/></small>
+                </a>
+              </TiltedCard>)}
+            </SocialChannelMarquee>
           </div>
         </section>
 
@@ -1940,9 +1878,7 @@ function App({ initialSocialData }) {
               <header className="story-header"><span className="story-no">02</span><p className="mini">CONTENT PILLARS</p></header>
               <div className="story-heading"><h3>创作版图</h3><p>独立策划「音乐制作」、「Apple Music」与「热单翻唱」三大内容线，建立起听觉与视觉的账号审美形象。</p></div>
             </div>
-            <div className="content-line-grid">
-              {currentSocialContentPillars.map(item => <ContentLineFolder item={item} key={item.no} />)}
-            </div>
+            <ContentLineFolderGrid items={currentSocialContentPillars} />
           </div>
         </section>
 
@@ -2068,12 +2004,12 @@ function App({ initialSocialData }) {
           </div>
           <div className="skill-layout">
             <div className="skill-stack">{skillGroups.map((g, i) => <article key={g.title}>
-              <div className="skill-copy"><span>0{i+1}</span><h3>{g.title}</h3><div className="skill-tags">{g.items.map(x => <b key={x}>{x}</b>)}</div></div>
-              <figure className="skill-image"><img src={g.image} alt="" loading="eager" decoding="async" /></figure>
+              <div className="skill-copy"><span>0{i+1}</span><h3>{g.title}</h3><SkillTags items={g.items} /></div>
+              <figure className="skill-image"><img src={['skills', 'albums'].includes(imageLoadStage) ? g.image : undefined} alt="" loading="eager" decoding="async" /></figure>
             </article>)}</div>
           </div>
         </div>
-        <AlbumWall />
+        <AlbumWall imagesEnabled={imageLoadStage === 'albums'} />
         <section className="skills-listening-section editorial-title-reference" aria-labelledby="skills-listening-title">
           <div className="skills-listening-inner">
             <header className="editorial-heading-row">
@@ -2081,7 +2017,7 @@ function App({ initialSocialData }) {
               <p className="editorial-heading-copy">持续聆听，从当下最受关注的新作到经得起时间检验的经典，在流行与历史之间不断拓宽音乐视野。</p>
             </header>
           </div>
-          <CoverflowCarousel slides={recentAlbums} />
+          {recentAlbums.length ? <CoverflowCarousel slides={recentAlbums} imagesEnabled={imageLoadStage === 'albums'} /> : <p className="content-empty">最近在听的专辑正在整理中。</p>}
           <footer className="page-section-footer listening-section-footer"><span>© 2026 AUGUST PEI</span><a className="contact-back-home" href="#home">BACK TO HOME <span aria-hidden="true">↑</span></a></footer>
         </section>
       </section>}
@@ -2109,7 +2045,7 @@ function App({ initialSocialData }) {
             </motion.h2>
           </LayoutGroup>
           <p className="contact-description">制作编曲 / AIGC 音乐 / 音乐内容运营相关机会与合作<span className="contact-description-break">{' '}</span><span className="contact-description-ending">欢迎联系！</span></p>
-          <a className="contact-mail" href="/resume/制作岗个人简历Ver1.docx" download="裴宇航-个人简历.docx">下载个人简历 <ArrowDown size={24}/></a>
+          <ResumeDownload className="contact-mail">下载个人简历 <ArrowDown size={24}/></ResumeDownload>
           <div className="contact-row">
             <a href="tel:+8613588038441"><Phone size={16}/><span>+86 135 8803 8441</span></a>
             <a href="mailto:yuhangpei322@gmail.com"><Mail size={16}/><span>yuhangpei322@gmail.com</span></a>
@@ -2156,7 +2092,7 @@ function SectionHead({ kicker, title, light=false }) {
   return <div className={`section-head ${light ? 'light' : ''}`}><div><p className="mini">{kicker}</p><h2>{title}</h2></div></div>
 }
 
-function ArrangementDetails() {
+function ArrangementDetails({ imagesEnabled = true }) {
   const [activeIndex, setActiveIndex] = useState(() => {
     try {
       const returnTone = sessionStorage.getItem(RETURN_TO_ARRANGEMENT_KEY)
@@ -2170,6 +2106,7 @@ function ArrangementDetails() {
   const [controlsVisible, setControlsVisible] = useState(false)
   const pointerStart = useRef(null)
   const carouselRef = useRef(null)
+  const hasEnteredViewport = useFirstViewportEntry(carouselRef)
   const wheelDistance = useRef(0)
   const wheelResetTimer = useRef(0)
   const wheelLocked = useRef(false)
@@ -2188,10 +2125,10 @@ function ArrangementDetails() {
   }
 
   useEffect(() => {
-    if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!hasEnteredViewport || isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const timer = window.setTimeout(() => selectSlide(activeIndex + 1), 6500)
     return () => window.clearTimeout(timer)
-  }, [activeIndex, isPaused])
+  }, [activeIndex, hasEnteredViewport, isPaused])
 
   useEffect(() => {
     const carousel = carouselRef.current
@@ -2281,7 +2218,7 @@ function ArrangementDetails() {
     selectSlide(activeIndex + (deltaX < 0 ? 1 : -1))
   }
 
-  return <section className={`arrangement-details${isPaused ? ' is-paused' : ''}${controlsVisible ? ' has-visible-controls' : ''}`} aria-labelledby="arrangement-details-title">
+  return <section className={`arrangement-details${!hasEnteredViewport || isPaused ? ' is-paused' : ''}${controlsVisible ? ' has-visible-controls' : ''}`} aria-labelledby="arrangement-details-title">
     <div className="arrangement-details-head">
       <div>
         <p className="mini">A CLOSER LISTEN</p>
@@ -2315,7 +2252,7 @@ function ArrangementDetails() {
           </div>
           <div className="arrangement-art" aria-hidden="true">
             <div className="arrangement-frame">
-              <img src={detail.cover} alt="" />
+              <img src={imagesEnabled ? detail.cover : undefined} alt="" />
             </div>
             <span className="arrangement-script">{detail.eyebrow.split(' · ')[0]}</span>
             <p>{detail.quote}</p>
@@ -3801,7 +3738,7 @@ function SynthDesignPage() {
     <section className="synth-section synth-delay-section" id="delay-fx" aria-labelledby="delay-fx-title">
       <div className="synth-section-heading">
         <div><span>02 / DELAY EFFECT</span><h2 id="delay-fx-title">Delay 效果器</h2></div>
-        <div className="synth-section-intro"><p>用短促的 Delay 延展合成器尾音，并通过 LFO 动态控制湿声比例，让 Delay 只在句尾浮现，为音色增加空间感与流动感。</p></div>
+        <div className="synth-section-intro"><p>用短促的 Delay 延展合成器尾音，并通过 LFO 动态控制湿声比例来实现 Ducking 效果，让 Delay 只在句尾浮现，为音色增加空间感与流动感。</p></div>
       </div>
       <div className="synth-delay-frame">
         <div className="synth-transport synth-delay-transport">
@@ -3928,7 +3865,7 @@ function SynthDesignPage() {
             </div>
             <div className="delay-note delay-lfo-note">
               <span>PRODUCTION NOTE</span>
-              <p aria-label="Production Note 内容待补充">全程打开 Delay FX 会导致句首音色模糊混沌，通过 LFO 控制在接近小节结尾时慢慢提高 Delay Wet，在保持音色清晰的同时让句尾有明显的延时效果</p>
+              <p aria-label="Production Note 内容待补充">全程打开 Delay FX 会导致句首音色模糊混沌，通过 LFO 控制在接近小节结尾时慢慢提高 Delay Wet，实现类似 Ducking 的效果，在保持音色清晰的同时让句尾有明显的延时效果</p>
             </div>
           </div>
         </div>
@@ -5436,6 +5373,32 @@ function StrengthStory({ no, tone, kicker, title, lead, points, image, imageAlt,
 
 function EducationAIStory({ no, tone, kicker, title, lead }) {
   const revealRef = useEducationReveal('research')
+  const publicationHeadingRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const heading = publicationHeadingRef.current
+    const titleElement = heading?.querySelector('h4')
+    const links = heading?.querySelector('.ai-publication-links')
+    if (!heading || !titleElement || !links) return
+    let disposed = false
+    const updateLayout = () => {
+      if (disposed) return
+      const gap = Number.parseFloat(window.getComputedStyle(heading).columnGap) || 0
+      const requiredWidth = titleElement.offsetWidth + links.offsetWidth + gap
+      heading.classList.toggle('has-stacked-links', requiredWidth > heading.clientWidth)
+    }
+    updateLayout()
+    const observer = new ResizeObserver(updateLayout)
+    ;[heading, titleElement, links].forEach(element => observer.observe(element))
+    document.fonts?.ready.then(updateLayout)
+    document.fonts?.addEventListener('loadingdone', updateLayout)
+    return () => {
+      disposed = true
+      observer.disconnect()
+      document.fonts?.removeEventListener('loadingdone', updateLayout)
+    }
+  }, [])
+
   const researchTags = ['AIGC', 'MLLM', 'Diffusion', 'Image Editing']
   const practiceItems = [
     ['掌纹图像生成', '探索掌纹纹理保持的可控生成方法，生成百万级别掌纹图像，改进生成质量与多样性，提升了模型在掌纹识别任务的性能。'],
@@ -5462,7 +5425,7 @@ function EducationAIStory({ no, tone, kicker, title, lead }) {
       <div className="ai-feature-grid">
         <section className="ai-publication" aria-labelledby="snr-edit-title">
           <span className="ai-block-kicker">FEATURED PUBLICATION</span>
-          <div className="ai-publication-title-row">
+          <div className="ai-publication-title-row" ref={publicationHeadingRef}>
             <h4 id="snr-edit-title">代表作：SNR-Edit</h4>
             <div className="ai-publication-links" aria-label="SNR-Edit 资源链接">
               <a href="https://openreview.net/pdf?id=fbhXjmmrgm" target="_blank" rel="noreferrer">
@@ -5474,8 +5437,8 @@ function EducationAIStory({ no, tone, kicker, title, lead }) {
                 <span>Code</span>
               </a>
             </div>
+            <h5>Structure-Aware Noise Rectification for{' '}<br/>Inversion-Free Flow-Based Editing</h5>
           </div>
-          <h5>Structure-Aware Noise Rectification for<br/>Inversion-Free Flow-Based Editing</h5>
           <div className="ai-publication-meta"><span>ACM Multimedia 2026</span><b>ACCEPTED</b></div>
           <p>提出一种无需反演的 Flow 模型图像编辑方法，将 SAM 掩码结构信息注入到初始噪声，改进了图像编辑的结构保持能力。</p>
           <figure className="ai-paper-figure">
@@ -5583,7 +5546,7 @@ function EducationLearningStory({ no, tone, kicker, title, lead }) {
   </article>
 }
 
-function AlbumWall() {
+function AlbumWall({ imagesEnabled = true }) {
   const viewportRef = useRef(null)
   const gridRef = useRef(null)
 
@@ -5723,13 +5686,14 @@ function AlbumWall() {
       <div><p className="mini">ALBUMS THAT SHAPED ME</p><h3 id="album-wall-title">启发我的音乐</h3></div>
       <p className="editorial-heading-copy">一些塑造了我对音乐、流行与审美的唱片。<br/><span>按住并拖动，探索整面专辑墙。</span></p>
     </header>
+    {!albumWall.length && <p className="content-empty">专辑正在整理中。</p>}
     <div className="album-wall-viewport" ref={viewportRef} aria-label="可拖动的专辑封面墙">
-      <div className="album-wall-grid" ref={gridRef}>
+      <div className="album-wall-grid" ref={gridRef} style={{ gridTemplateColumns: `repeat(${Math.min(10, albumWall.length) || 1}, var(--album-size))` }}>
         {albumWall.map(album => <div className="album-tile" key={album.id}>
           <TiltedCard
-            imageSrc={album.src}
-            altText={`${album.title} 专辑封面`}
-            captionText={album.title}
+            imageSrc={imagesEnabled ? album.src : undefined}
+            altText={album.alt || `${album.title} 专辑封面`}
+            captionText={[album.title, album.subtitle].filter(Boolean).join(' · ')}
             rotateAmplitude={10}
             scaleOnHover={1.07}
             imageLoading="eager"
@@ -5741,11 +5705,42 @@ function AlbumWall() {
   </section>
 }
 
-function Work({ no, title, artist, tags=[], color, cover, video, active=false, isPlaying=false, onToggle, placeholder=false }) {
+function WorkTags({ title, tags }) {
+  const tagsRef = useRef(null)
+  const [visibleCount, setVisibleCount] = useState(tags.length)
+
+  useLayoutEffect(() => {
+    const container = tagsRef.current
+    const measure = () => {
+      const gap = parseFloat(window.getComputedStyle(container).columnGap) || 0
+      const availableWidth = container.getBoundingClientRect().width
+      let usedWidth = 0
+      let count = 0
+      for (const tag of container.children) {
+        usedWidth += tag.getBoundingClientRect().width + (count ? gap : 0)
+        if (usedWidth > availableWidth) break
+        count += 1
+      }
+      setVisibleCount(count)
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(container)
+    // Observe tag widths too, so font loading and text changes update the cutoff.
+    for (const tag of container.children) observer.observe(tag)
+    return () => observer.disconnect()
+  }, [tags])
+
+  return <div ref={tagsRef} className="work-tags" aria-label={`${title} 标签`}>
+    {tags.map((tag, index) => <span key={tag} aria-hidden={index >= visibleCount} style={{ visibility: index < visibleCount ? 'visible' : 'hidden' }}>{tag}</span>)}
+  </div>
+}
+
+function Work({ no, title, artist, tags=[], color, cover, video, active=false, isPlaying=false, onToggle, placeholder=false, playable=true, imagesEnabled=true }) {
   return <article className="work-row">
     <span className="work-no">{no}</span>
     <div className={`cover ${color || ''}`}>
-      {cover ? <img src={cover} alt={`${title} 封面`} /> : <div className="wave">||||||||||||</div>}
+      {cover ? <img src={imagesEnabled ? cover : undefined} alt={`${title} 封面`} /> : <div className="wave">||||||||||||</div>}
       {placeholder && <small>COMING SOON</small>}
     </div>
     <div className="work-info">
@@ -5754,9 +5749,9 @@ function Work({ no, title, artist, tags=[], color, cover, video, active=false, i
         {video && <a className="work-title-link" href={video} target="_blank" rel="noreferrer" aria-label={`观看 ${title} 视频`}>{title}<ArrowUpRight size={18} aria-hidden="true" /></a>}
       </h3>
       <p>{artist}</p>
-      <div className="work-tags" aria-label={`${title} 标签`}>{tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+      <WorkTags title={title} tags={tags} />
     </div>
-    <div className="player"><button className={active ? 'is-active' : ''} disabled={placeholder} onClick={onToggle} aria-pressed={active && isPlaying} aria-label={placeholder ? '即将上线' : isPlaying && active ? '暂停' : `播放 ${title}`}>{isPlaying && active ? <Pause/> : <Play/>}</button><div className="player-timeline"><div className="progress"><i style={{width: active ? '100%' : '0%'}}></i></div><span>{placeholder ? 'COMING SOON' : active ? 'NOW SELECTED' : 'READY TO PLAY'}</span></div></div>
+    <div className="player"><button className={active ? 'is-active' : ''} disabled={placeholder || !playable} onClick={onToggle} aria-pressed={active && isPlaying} aria-label={placeholder ? '即将上线' : !playable ? '暂无音频' : isPlaying && active ? '暂停' : `播放 ${title}`}>{isPlaying && active ? <Pause/> : <Play/>}</button><div className="player-timeline"><div className="progress"><i style={{width: active ? '100%' : '0%'}}></i></div><span>{placeholder ? 'COMING SOON' : !playable ? 'NO AUDIO' : active ? 'NOW SELECTED' : 'READY TO PLAY'}</span></div></div>
     {video ? <a className="video-link" href={video} target="_blank" rel="noreferrer" aria-label={`观看 ${title} 视频`}>VIDEO <ArrowUpRight size={16}/></a> : <span className="video-link is-disabled" aria-disabled="true">VIDEO <ArrowUpRight size={16}/></span>}
   </article>
 }
@@ -5828,7 +5823,7 @@ function AnimatedPlayerCover({ src, title }) {
   }, [src])
 
   return <div className={`floating-player-cover is-${visual.phase}`} role="img" aria-label={`${title} 封面`}>
-    <img className="floating-player-cover-base" src={visual.shown} alt="" aria-hidden="true" />
+    {visual.shown ? <img className="floating-player-cover-base" src={visual.shown} alt="" aria-hidden="true" /> : <Music2 className="floating-player-cover-fallback" aria-hidden="true"/>}
     {visual.next && <img className="floating-player-cover-next" src={visual.next} alt="" aria-hidden="true" />}
   </div>
 }
@@ -6116,7 +6111,7 @@ async function loadOverallData() {
     const dataUrl = import.meta.env.DEV
       ? '/api/overall-data'
       : `${import.meta.env.BASE_URL}overall-data.json`
-    const response = await fetch(dataUrl, { headers: { Accept: 'application/json' } })
+    const response = await fetch(dataUrl, { cache: 'no-store', headers: { Accept: 'application/json' } })
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
     const data = await response.json()
     if (!data?.total) throw new Error('响应缺少 total 字段')
@@ -6127,7 +6122,22 @@ async function loadOverallData() {
   }
 }
 
-loadOverallData().then(initialSocialData => {
+async function loadSiteContent() {
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}site-content.json`, { cache: 'no-store' })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const content = validateContent(await response.json())
+    musicWorks = content.musicWorks
+    musicTracks = musicWorks.filter(track => track.src && !track.placeholder)
+    recentAlbums = content.recentAlbums
+    albumWall = content.albumWall
+    audienceProfiles = content.audienceProfiles
+  } catch (error) {
+    console.warn('[site-content] 使用内置内容：', error)
+  }
+}
+
+Promise.all([loadOverallData(), loadSiteContent()]).then(([initialSocialData]) => {
   const rootElement = document.getElementById('root')
   rootElement.removeAttribute('aria-busy')
   createRoot(rootElement).render(<App initialSocialData={initialSocialData} />)

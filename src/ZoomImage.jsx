@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react'
+import useCanHover from './useCanHover'
 
 const springConfig = { damping: 20, stiffness: 150, mass: .5 }
 
@@ -13,6 +14,7 @@ export default function ZoomImage({
   className = '',
 }) {
   const prefersReducedMotion = useReducedMotion()
+  const canHover = useCanHover()
   const [isOpen, setIsOpen] = useState(false)
   const mouseX = useMotionValue(50)
   const mouseY = useMotionValue(50)
@@ -23,8 +25,8 @@ export default function ZoomImage({
     ([latestX, latestY]) => `${latestX}% ${latestY}%`,
   )
 
-  const handleMouseMove = event => {
-    if (prefersReducedMotion) return
+  const handlePointerMove = event => {
+    if (!canHover || event.pointerType !== 'mouse' || prefersReducedMotion) return
     const { left, top, width: frameWidth, height: frameHeight } = event.currentTarget.getBoundingClientRect()
     mouseX.set(((event.clientX - left) / frameWidth) * 100)
     mouseY.set(((event.clientY - top) / frameHeight) * 100)
@@ -51,8 +53,8 @@ export default function ZoomImage({
 
   return <><motion.div
     className={`zoom-image ${className}`.trim()}
-    onMouseMove={handleMouseMove}
-    onMouseLeave={handleMouseLeave}
+    onPointerMove={handlePointerMove}
+    onPointerLeave={handleMouseLeave}
   >
     <motion.img
       src={src}
@@ -63,7 +65,7 @@ export default function ZoomImage({
       decoding="async"
       draggable="false"
       style={{ transformOrigin }}
-      whileHover={prefersReducedMotion ? undefined : { scale: zoomScale }}
+      whileHover={!canHover || prefersReducedMotion ? undefined : { scale: zoomScale }}
       transition={{ type: 'spring', duration: .5, bounce: 0 }}
     />
     <div className="interaction-hint zoom-hint" aria-hidden="true">

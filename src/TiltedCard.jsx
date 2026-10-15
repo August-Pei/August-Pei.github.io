@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useMotionValue, useSpring } from 'motion/react'
+import useCanHover from './useCanHover'
 import './TiltedCard.css'
 
 const cardSpring = {
@@ -19,6 +20,7 @@ export default function TiltedCard({
   showTooltip = true,
   imageLoading = 'lazy',
 }) {
+  const canHover = useCanHover()
   const cardRef = useRef(null)
   const lastY = useRef(0)
   const tooltipX = useMotionValue(0)
@@ -29,8 +31,18 @@ export default function TiltedCard({
   const tooltipOpacity = useSpring(0, { stiffness: 260, damping: 28 })
   const tooltipRotate = useSpring(0, { stiffness: 350, damping: 30, mass: 1 })
 
-  const handleMouseMove = event => {
-    if (!cardRef.current) return
+  useEffect(() => {
+    if (canHover) return
+    scale.jump(1)
+    rotateX.jump(0)
+    rotateY.jump(0)
+    tooltipOpacity.jump(0)
+    tooltipRotate.jump(0)
+    lastY.current = 0
+  }, [canHover, scale, rotateX, rotateY, tooltipOpacity, tooltipRotate])
+
+  const handlePointerMove = event => {
+    if (!canHover || event.pointerType !== 'mouse' || !cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
     const offsetX = event.clientX - rect.left - rect.width / 2
     const offsetY = event.clientY - rect.top - rect.height / 2
@@ -43,12 +55,13 @@ export default function TiltedCard({
     lastY.current = offsetY
   }
 
-  const handleMouseEnter = () => {
+  const handlePointerEnter = event => {
+    if (!canHover || event.pointerType !== 'mouse') return
     scale.set(scaleOnHover)
     tooltipOpacity.set(1)
   }
 
-  const handleMouseLeave = () => {
+  const handlePointerLeave = () => {
     tooltipOpacity.set(0)
     scale.set(1)
     rotateX.set(0)
@@ -60,9 +73,10 @@ export default function TiltedCard({
   return <figure
     ref={cardRef}
     className={`tilted-card-figure ${className}`.trim()}
-    onMouseMove={handleMouseMove}
-    onMouseEnter={handleMouseEnter}
-    onMouseLeave={handleMouseLeave}
+    onPointerMove={handlePointerMove}
+    onPointerEnter={handlePointerEnter}
+    onPointerLeave={handlePointerLeave}
+    onPointerCancel={handlePointerLeave}
   >
     <motion.div className="tilted-card-inner" style={{ rotateX, rotateY, scale }}>
       {children ?? <img src={imageSrc} alt={altText} className="tilted-card-img" width="700" height="700" loading={imageLoading} draggable="false" />}

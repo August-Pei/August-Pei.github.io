@@ -26,3 +26,11 @@ bilibili_video_stats.csv
 __pycache__/
 .venv/
 data/.bilibili_cookie
+data/.bilibili_cookie.*.tmp
+
+# Local content-manager backups
+data/admin-backups/
+public/*.json.*.tmp
+
+# Isolated website publisher checkout and task state
+data/.site-publisher/

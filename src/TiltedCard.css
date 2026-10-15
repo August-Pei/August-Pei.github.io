@@ -16,20 +16,22 @@
   transition: box-shadow .35s ease;
 }
 
-.tilted-card-figure:hover .tilted-card-inner {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
-}
+@media (hover: hover) and (pointer: fine) {
+  .tilted-card-figure:hover .tilted-card-inner {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
+  }
 
-.tilted-card-figure.hero-photo:hover .tilted-card-inner {
-  box-shadow: 0 12px 64px rgba(0, 0, 0, .06);
-}
+  .tilted-card-figure.hero-photo:hover .tilted-card-inner {
+    box-shadow: 0 12px 64px rgba(0, 0, 0, .06);
+  }
 
-.tilted-card-figure.strength-tilt:hover .tilted-card-inner {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .06);
-}
+  .tilted-card-figure.strength-tilt:hover .tilted-card-inner {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .06);
+  }
 
-.tilted-card-figure.social-channel-tilt:hover .tilted-card-inner {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+  .tilted-card-figure.social-channel-tilt:hover .tilted-card-inner {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+  }
 }
 
 .tilted-card-figure.hero-photo {
@@ -252,4 +254,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .tilted-card-inner { transform: none !important; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .tilted-card-inner { transform: none !important; will-change: auto; }
 }

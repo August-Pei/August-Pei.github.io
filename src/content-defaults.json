@@ -1,0 +1,825 @@
+{
+  "version": 1,
+  "updatedAt": null,
+  "musicWorks": [
+    {
+      "title": "Blank Space",
+      "artist": "Taylor Swift (AUGUST REMAKE)",
+      "meta": "流行热单还原 · Sound Redesign",
+      "src": "/music/Blank Space.mp3",
+      "cover": "/albums/wall/35 - 1989.webp",
+      "video": "https://www.bilibili.com/video/BV1xfYT6QEzg/?share_source=copy_web&vd_source=ce498b5e8850e269d4608ac666df0a42",
+      "tags": [
+        "Drum Design",
+        "Layering",
+        "Synth Design",
+        "Serum"
+      ],
+      "id": "blank-space"
+    },
+    {
+      "title": "360",
+      "artist": "Charli xcx (AUGUST REMAKE)",
+      "meta": "编曲拆解与全曲还原 · Logic Pro",
+      "src": "/music/360.mp3",
+      "cover": "/albums/wall/34 - BRAT.webp",
+      "video": "https://www.bilibili.com/video/BV1B1tA6jECs/?share_source=copy_web&vd_source=ce498b5e8850e269d4608ac666df0a42",
+      "tags": [
+        "Synth Design",
+        "Serum",
+        "Drum Programming",
+        "Texture Layering"
+      ],
+      "id": "360"
+    },
+    {
+      "title": "BIRDS OF A FEATHER",
+      "artist": "Billie Eilish (AUGUST REMAKE)",
+      "meta": "编曲拆解与全曲还原 · Logic Pro",
+      "src": "/music/BIRDS OF A FEATHER.mp3",
+      "cover": "/albums/wall/26 - HIT ME HARD AND SOFT.webp",
+      "video": "https://www.bilibili.com/video/BV1qHut6NEUu/?share_source=copy_web&vd_source=ce498b5e8850e269d4608ac666df0a42",
+      "tags": [
+        "Arrangement",
+        "Guitar Texture",
+        "Spatial Mix"
+      ],
+      "id": "birds-of-a-feather"
+    },
+    {
+      "id": "aigc-original-projects",
+      "title": "AIGC ORIGINAL PROJECTS",
+      "artist": "AUGUST × SUNO",
+      "meta": "",
+      "src": "",
+      "cover": "",
+      "video": "",
+      "tags": [
+        "Suno",
+        "Prompt Design",
+        "AI Arrangement",
+        "DAW Rebuild",
+        "Sound Selection"
+      ],
+      "color": "blue",
+      "placeholder": true
+    }
+  ],
+  "recentAlbums": [
+    {
+      "title": "Lost Weekend",
+      "subtitle": "Phoebe Bridgers",
+      "src": "/albums/recent/Lost Weekend.webp",
+      "alt": "Lost Weekend 专辑封面",
+      "id": "recent-01"
+    },
+    {
+      "title": "West End Girl",
+      "subtitle": "Lily Allen",
+      "src": "/albums/recent/West End Girl.webp",
+      "alt": "West End Girl 专辑封面",
+      "id": "recent-02"
+    },
+    {
+      "title": "Day and Night",
+      "subtitle": "Carly Rae Jepsen",
+      "src": "/albums/recent/Day and Night.webp",
+      "alt": "Day and Night 专辑封面",
+      "id": "recent-03"
+    },
+    {
+      "title": "Bass Persuades",
+      "subtitle": "Miley Cyrus",
+      "src": "/albums/recent/Bass Persuades.webp",
+      "alt": "Bass Persuades 专辑封面",
+      "id": "recent-04"
+    },
+    {
+      "title": "Location",
+      "subtitle": "She Her Her Hers",
+      "src": "/albums/recent/Location.webp",
+      "alt": "Location 专辑封面",
+      "id": "recent-05"
+    },
+    {
+      "title": "We Are",
+      "subtitle": "Jon Batiste",
+      "src": "/albums/recent/We Are.webp",
+      "alt": "We Are 专辑封面",
+      "id": "recent-06"
+    },
+    {
+      "title": "Women in Music Pt. III",
+      "subtitle": "HAIM",
+      "src": "/albums/recent/Women in Music Pt. III.webp",
+      "alt": "Women in Music Pt. III 专辑封面",
+      "id": "recent-07"
+    },
+    {
+      "title": "you seem pretty sad for a girl so in love",
+      "subtitle": "Olivia Rodrigo",
+      "src": "/albums/recent/you seem pretty sad for a girl so in love.webp",
+      "alt": "you seem pretty sad for a girl so in love 专辑封面",
+      "id": "recent-08"
+    },
+    {
+      "title": "The Life of a Showgirl: The Encore",
+      "subtitle": "Taylor Swift",
+      "src": "/albums/recent/The Life of a Showgirl - The Encore.webp",
+      "alt": "The Life of a Showgirl - The Encore 专辑封面",
+      "id": "recent-09"
+    },
+    {
+      "title": "Oh yeah?",
+      "subtitle": "Steve Lacy",
+      "src": "/albums/recent/Oh yeah.webp",
+      "alt": "Oh yeah? 专辑封面",
+      "id": "recent-10"
+    },
+    {
+      "title": "PRIMA",
+      "subtitle": "ADÉLA",
+      "src": "/albums/recent/PRIMA.webp",
+      "alt": "PRIMA 专辑封面",
+      "id": "recent-11"
+    }
+  ],
+  "albumWall": [
+    {
+      "id": "01",
+      "title": "The Secret of Us",
+      "src": "/albums/wall/01 - The Secret of Us.webp",
+      "subtitle": "Gracie Abrams"
+    },
+    {
+      "id": "02",
+      "title": "The Secret of Us",
+      "src": "/albums/wall/02 - Fancy That.webp",
+      "subtitle": "Gracie Abrams"
+    },
+    {
+      "id": "03",
+      "title": "DeBÍ TiRAR MáS FOToS",
+      "src": "/albums/wall/03 - DtMF.webp",
+      "subtitle": "Bad Bunny"
+    },
+    {
+      "id": "04",
+      "title": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
+      "src": "/albums/wall/04 - WHEN WE ALL FALL ASLEEP.webp",
+      "subtitle": "Billie Eilish"
+    },
+    {
+      "id": "05",
+      "title": "Did you know that there's a tunnel under Ocean Blvd",
+      "src": "/albums/wall/05 - Did You Know That There's a Tunnel Under Ocean Blvd.webp",
+      "subtitle": "Lana Del Rey"
+    },
+    {
+      "id": "06",
+      "title": "evermore",
+      "src": "/albums/wall/06 - evermore.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "07",
+      "title": "ARIRANG",
+      "src": "/albums/wall/07 - ARIRANG.webp",
+      "subtitle": "BTS"
+    },
+    {
+      "id": "08",
+      "title": "After Hours",
+      "src": "/albums/wall/08 - After Hours.webp",
+      "subtitle": "The Weeknd"
+    },
+    {
+      "id": "09",
+      "title": "The Fame Monster",
+      "src": "/albums/wall/09 - The Fame Monster.webp",
+      "subtitle": "Lady Gaga"
+    },
+    {
+      "id": "10",
+      "title": "MASSEDUCTION",
+      "src": "/albums/wall/10 - MASSEDUCTION.webp",
+      "subtitle": "St. Vincent"
+    },
+    {
+      "id": "11",
+      "title": "GUTS",
+      "src": "/albums/wall/11 - GUTS.webp",
+      "subtitle": "Olivia Rodrigo"
+    },
+    {
+      "id": "12",
+      "title": "25",
+      "src": "/albums/wall/12 - 25.webp",
+      "subtitle": "Adele"
+    },
+    {
+      "id": "13",
+      "title": "Man's Best Friend",
+      "src": "/albums/wall/13 - Man’s Best Friend.webp",
+      "subtitle": "Sabrina Carpenter"
+    },
+    {
+      "id": "14",
+      "title": "West End Girl",
+      "src": "/albums/wall/14 - West End Girl.webp",
+      "subtitle": "Lily Allen"
+    },
+    {
+      "id": "15",
+      "title": "Imaginal Disk",
+      "src": "/albums/wall/15 - Imaginal Disk.webp",
+      "subtitle": "Magdalena Bay"
+    },
+    {
+      "id": "16",
+      "title": "Your Name.",
+      "src": "/albums/wall/16 - Your Name..webp",
+      "subtitle": "RADWIMPS"
+    },
+    {
+      "id": "17",
+      "title": "Sweetener",
+      "src": "/albums/wall/17 - Sweetener.webp",
+      "subtitle": "Ariana Grande"
+    },
+    {
+      "id": "18",
+      "title": "Bloom",
+      "src": "/albums/wall/18 - Bloom.webp",
+      "subtitle": "Troye Sivan"
+    },
+    {
+      "id": "19",
+      "title": "Midnights",
+      "src": "/albums/wall/19 - Midnights.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "20",
+      "title": "陪我歌唱(苏打绿版)",
+      "src": "/albums/wall/20 - 陪我歌唱(苏打绿版).webp",
+      "subtitle": "苏打绿"
+    },
+    {
+      "id": "21",
+      "title": "Bewitched",
+      "src": "/albums/wall/21 - Bewitched.webp",
+      "subtitle": "Laufey"
+    },
+    {
+      "id": "22",
+      "title": "My Beautiful Dark Twisted Fantasy",
+      "src": "/albums/wall/22 - My Beautiful Dark Twisted Fantasy.webp",
+      "subtitle": "Kanye West"
+    },
+    {
+      "id": "23",
+      "title": "E•MO•TION",
+      "src": "/albums/wall/23 - Emotion.webp",
+      "subtitle": "Carly Rae Jepsen"
+    },
+    {
+      "id": "24",
+      "title": "Golden Hour",
+      "src": "/albums/wall/24 - Golden Hour.webp",
+      "subtitle": "Kacey Musgraves"
+    },
+    {
+      "id": "25",
+      "title": "Blonde",
+      "src": "/albums/wall/25 - Blonde.webp",
+      "subtitle": "Frank Ocean"
+    },
+    {
+      "id": "26",
+      "title": "HIT ME HARD AND SOFT",
+      "src": "/albums/wall/26 - HIT ME HARD AND SOFT.webp",
+      "subtitle": "Billie Eilish"
+    },
+    {
+      "id": "27",
+      "title": "Norman Fucking Rockwell!",
+      "src": "/albums/wall/27 - Norman Fucking Rockwell!.webp",
+      "subtitle": "Lana Del Rey"
+    },
+    {
+      "id": "28",
+      "title": "Lemonade",
+      "src": "/albums/wall/28 - Lemonade.webp",
+      "subtitle": "Beyoncé"
+    },
+    {
+      "id": "29",
+      "title": "SOUR",
+      "src": "/albums/wall/29 - SOUR.webp",
+      "subtitle": "Olivia Rodrigo"
+    },
+    {
+      "id": "30",
+      "title": "Scarlet",
+      "src": "/albums/wall/30 - Scarlet.webp",
+      "subtitle": "Doja Cat"
+    },
+    {
+      "id": "31",
+      "title": "Music, Fashion, Film",
+      "src": "/albums/wall/31 - Music, Fashion, Film.webp",
+      "subtitle": "Charli xcx"
+    },
+    {
+      "id": "32",
+      "title": "Hounds of Love",
+      "src": "/albums/wall/32 - Hounds of Love.webp",
+      "subtitle": "Kate Bush"
+    },
+    {
+      "id": "33",
+      "title": "SOS",
+      "src": "/albums/wall/33 - SOS.webp",
+      "subtitle": "SZA"
+    },
+    {
+      "id": "34",
+      "title": "BRAT",
+      "src": "/albums/wall/34 - BRAT.webp",
+      "subtitle": "Charli xcx"
+    },
+    {
+      "id": "35",
+      "title": "1989",
+      "src": "/albums/wall/35 - 1989.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "36",
+      "title": "eternal sunshine",
+      "src": "/albums/wall/36 - eternal sunshine.webp",
+      "subtitle": "Ariana Grande"
+    },
+    {
+      "id": "37",
+      "title": "MAYHEM",
+      "src": "/albums/wall/37 - MAYHEM.webp",
+      "subtitle": "Lady Gaga"
+    },
+    {
+      "id": "38",
+      "title": "Blue",
+      "src": "/albums/wall/38 - Blue.webp",
+      "subtitle": "Joni Mitchell"
+    },
+    {
+      "id": "39",
+      "title": "Interstellar",
+      "src": "/albums/wall/39 - Interstellar.webp",
+      "subtitle": "Hans Zimmer"
+    },
+    {
+      "id": "40",
+      "title": "EUSEXUA",
+      "src": "/albums/wall/40 - EUSEXUA.webp",
+      "subtitle": "FKA twigs"
+    },
+    {
+      "id": "41",
+      "title": "Speak Now (Taylor's Version)",
+      "src": "/albums/wall/41 - Speak Now.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "42",
+      "title": "Addison",
+      "src": "/albums/wall/42 - Addison.webp",
+      "subtitle": "Addison Rae"
+    },
+    {
+      "id": "43",
+      "title": "冀西南林路行",
+      "src": "/albums/wall/43 - 冀西南林路行.webp",
+      "subtitle": "万能青年旅店"
+    },
+    {
+      "id": "44",
+      "title": "The Dark Side of the Moon",
+      "src": "/albums/wall/44 - The Dark Side of the Moon.webp",
+      "subtitle": "Pink Floyd"
+    },
+    {
+      "id": "45",
+      "title": "RENAISSANCE",
+      "src": "/albums/wall/45 - RENAISSANCE.webp",
+      "subtitle": "Beyoncé"
+    },
+    {
+      "id": "46",
+      "title": "you seem pretty sad for a girl so in love",
+      "src": "/albums/wall/46 - you seem pretty sad for a girl so in love.webp",
+      "subtitle": "Olivia Rodrigo"
+    },
+    {
+      "id": "47",
+      "title": "纯妹妹",
+      "src": "/albums/wall/47 - 纯妹妹.webp",
+      "subtitle": "单依纯"
+    },
+    {
+      "id": "48",
+      "title": "Something Beautiful",
+      "src": "/albums/wall/48 - Something Beautiful.webp",
+      "subtitle": "Miley Cyrus"
+    },
+    {
+      "id": "49",
+      "title": "新的心跳",
+      "src": "/albums/wall/49 - 新的心跳.webp",
+      "subtitle": "G.E.M.邓紫棋"
+    },
+    {
+      "id": "50",
+      "title": "Carrie & Lowell",
+      "src": "/albums/wall/50 - Carrie & Lowell.webp",
+      "subtitle": "Sufjan Stevens"
+    },
+    {
+      "id": "51",
+      "title": "CONFESSIONS II",
+      "src": "/albums/wall/51 - CONFESSIONS II.webp",
+      "subtitle": "Madonna"
+    },
+    {
+      "id": "52",
+      "title": "Elvis Presley",
+      "src": "/albums/wall/52 - Elvis Presley.webp",
+      "subtitle": "Elvis Presley"
+    },
+    {
+      "id": "53",
+      "title": "The Rise and Fall of a Midwest Princess",
+      "src": "/albums/wall/53 - The Rise and Fall of a Midwest Princess.webp",
+      "subtitle": "Chappell Roan"
+    },
+    {
+      "id": "54",
+      "title": "Melodrama",
+      "src": "/albums/wall/54 - Melodrama.webp",
+      "subtitle": "Lorde"
+    },
+    {
+      "id": "55",
+      "title": "LUX",
+      "src": "/albums/wall/55 - LUX.webp",
+      "subtitle": "ROSALÍA"
+    },
+    {
+      "id": "56",
+      "title": "Short n' Sweet",
+      "src": "/albums/wall/56 - Short n' Sweet.webp",
+      "subtitle": "Sabrina Carpenter"
+    },
+    {
+      "id": "57",
+      "title": "folklore",
+      "src": "/albums/wall/57 - folklore.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "58",
+      "title": "Lost Weekend",
+      "src": "/albums/wall/58 - Lost Weekend.webp",
+      "subtitle": "Phoebe Bridgers"
+    },
+    {
+      "id": "59",
+      "title": "The Miseducation of Lauryn Hill",
+      "src": "/albums/wall/59 - The Miseducation of Lauren Hill.webp",
+      "subtitle": "Lauryn Hill"
+    },
+    {
+      "id": "60",
+      "title": "THAT'S SHOWBIZ BABY!",
+      "src": "/albums/wall/60 - THAT's SHOWBBIZ BABY!.webp",
+      "subtitle": "JADE"
+    },
+    {
+      "id": "61",
+      "title": "Planet Her",
+      "src": "/albums/wall/61 - Planet Her.webp",
+      "subtitle": "Doja Cat"
+    },
+    {
+      "id": "62",
+      "title": "thank u, next",
+      "src": "/albums/wall/62 - thank u, next.webp",
+      "subtitle": "Ariana Grande"
+    },
+    {
+      "id": "63",
+      "title": "Dawn FM",
+      "src": "/albums/wall/63 - Dawn FM.webp",
+      "subtitle": "The Weeknd"
+    },
+    {
+      "id": "64",
+      "title": "无与伦比的美丽(苏打绿版)",
+      "src": "/albums/wall/64 - 无与伦比的美丽(苏打绿版).webp",
+      "subtitle": "苏打绿"
+    },
+    {
+      "id": "65",
+      "title": "÷",
+      "src": "/albums/wall/65 - Divide.webp",
+      "subtitle": "Ed Sheeran"
+    },
+    {
+      "id": "66",
+      "title": "The Art of Loving",
+      "src": "/albums/wall/66 - The Art of Loving.webp",
+      "subtitle": "Olivia Dean"
+    },
+    {
+      "id": "67",
+      "title": "Teenage Dream",
+      "src": "/albums/wall/67 - Teenage Dream.webp",
+      "subtitle": "Katy Perry"
+    },
+    {
+      "id": "68",
+      "title": "VILLAIN",
+      "src": "/albums/wall/68 - VILLAIN.webp",
+      "subtitle": "朱婧汐"
+    },
+    {
+      "id": "69",
+      "title": "Virgin",
+      "src": "/albums/wall/69 - Virgin.webp",
+      "subtitle": "Lorde"
+    },
+    {
+      "id": "70",
+      "title": "Future Nostalgia",
+      "src": "/albums/wall/70 - future nostalgia.webp",
+      "subtitle": "Dua Lipa"
+    },
+    {
+      "id": "71",
+      "title": "Lover",
+      "src": "/albums/wall/71 - Lover.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "72",
+      "title": "最后的水族馆",
+      "src": "/albums/wall/72 - 最后的水族馆.webp",
+      "subtitle": "裘德"
+    },
+    {
+      "id": "73",
+      "title": "COWBOY CARTER",
+      "src": "/albums/wall/73 - COWBOY CARTER.webp",
+      "subtitle": "Beyoncé"
+    },
+    {
+      "id": "74",
+      "title": "ARTPOP",
+      "src": "/albums/wall/74 - Artpop.webp",
+      "subtitle": "Lady Gaga"
+    },
+    {
+      "id": "75",
+      "title": "Deeper Well",
+      "src": "/albums/wall/75 - Deeper Well.webp",
+      "subtitle": "Kacey Musgraves"
+    },
+    {
+      "id": "76",
+      "title": "The Complete Recordings",
+      "src": "/albums/wall/76 - The Complete Recordings.webp",
+      "subtitle": "Robert Johnson"
+    },
+    {
+      "id": "77",
+      "title": "To Pimp a Butterfly",
+      "src": "/albums/wall/77 - To Pimp a Butterfly.webp",
+      "subtitle": "Kendrick Lamar"
+    },
+    {
+      "id": "78",
+      "title": "The Tortured Poets Department",
+      "src": "/albums/wall/78 - The Tortured Poets Department.webp",
+      "subtitle": "Taylor Swift"
+    },
+    {
+      "id": "79",
+      "title": "THIS MUSIC MAY CONTAIN HOPE.",
+      "src": "/albums/wall/79 - THIS MUSIC MAY CONTAIN HOPE..webp",
+      "subtitle": "RAYE"
+    },
+    {
+      "id": "80",
+      "title": "Come Away with Me",
+      "src": "/albums/wall/80 - Come Away with Me.webp",
+      "subtitle": "Norah Jones"
+    }
+  ],
+  "audienceProfiles": {
+    "bilibili": {
+      "name": "哔哩哔哩",
+      "age": [
+        [
+          "0–16",
+          "10.3%"
+        ],
+        [
+          "16–25",
+          "49.7%"
+        ],
+        [
+          "25–40",
+          "30.3%"
+        ],
+        [
+          ">40",
+          "9.7%"
+        ]
+      ],
+      "gender": [
+        [
+          "女性",
+          "10.8%"
+        ],
+        [
+          "男性",
+          "89.2%"
+        ]
+      ],
+      "regions": [
+        [
+          "广东",
+          "11.6%"
+        ],
+        [
+          "上海",
+          "9.2%"
+        ],
+        [
+          "江苏",
+          "7.5%"
+        ],
+        [
+          "四川",
+          "6.4%"
+        ],
+        [
+          "浙江",
+          "5.8%"
+        ]
+      ],
+      "interests": [
+        "音乐",
+        "欧美音乐",
+        "Apple Music",
+        "欧美歌手",
+        "编曲",
+        "视觉设计"
+      ]
+    },
+    "rednote": {
+      "name": "小红书",
+      "age": [
+        [
+          "<18",
+          "12%"
+        ],
+        [
+          "18–24",
+          "45%"
+        ],
+        [
+          "25–34",
+          "27%"
+        ],
+        [
+          "35-44",
+          "7%"
+        ],
+        [
+          ">44",
+          "6%"
+        ]
+      ],
+      "gender": [
+        [
+          "女性",
+          "26%"
+        ],
+        [
+          "男性",
+          "74%"
+        ]
+      ],
+      "regions": [
+        [
+          "上海",
+          "9%"
+        ],
+        [
+          "杭州",
+          "8%"
+        ],
+        [
+          "北京",
+          "5%"
+        ],
+        [
+          "天津",
+          "4%"
+        ],
+        [
+          "成都",
+          "3%"
+        ]
+      ],
+      "interests": [
+        "音乐",
+        "欧美音乐",
+        "Apple Music",
+        "编曲",
+        "生活方式",
+        "科技数码"
+      ]
+    },
+    "tiktok": {
+      "name": "TikTok",
+      "age": [
+        [
+          "18–24",
+          "39.7%"
+        ],
+        [
+          "25–34",
+          "43.4%"
+        ],
+        [
+          "35–44",
+          "10.3%"
+        ],
+        [
+          "45-54",
+          "5.0%"
+        ],
+        [
+          ">55",
+          "1.6%"
+        ]
+      ],
+      "gender": [
+        [
+          "女性",
+          "40%"
+        ],
+        [
+          "男性",
+          "59%"
+        ],
+        [
+          "其他",
+          "1%"
+        ]
+      ],
+      "regions": [
+        [
+          "美国",
+          "31.8%"
+        ],
+        [
+          "墨西哥",
+          "14.0%"
+        ],
+        [
+          "巴西",
+          "8.6%"
+        ],
+        [
+          "日本",
+          "6.0%"
+        ],
+        [
+          "越南",
+          "5.8%"
+        ]
+      ],
+      "interests": [
+        "Music",
+        "Pop Music",
+        "Apple Music",
+        "Music Production",
+        "Visual Design"
+      ]
+    }
+  }
+}

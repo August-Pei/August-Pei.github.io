@@ -21,7 +21,6 @@ const detailSelectors = {
     '.ai-research-band > p',
     '.ai-publication > .ai-block-kicker',
     '.ai-publication-title-row',
-    '.ai-publication h5',
     '.ai-publication-meta',
     '.ai-publication > p',
     '.ai-paper-figure',

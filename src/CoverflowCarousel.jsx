@@ -1,13 +1,15 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import useFirstViewportEntry from './useFirstViewportEntry'
 import './CoverflowCarousel.css'
 
 const CARD_PITCH = .98
 const SETTLE_EASING = .075
 const DRAG_INERTIA = .34
 
-export default function CoverflowCarousel({ slides, label = '最近在听的专辑' }) {
+export default function CoverflowCarousel({ slides, label = '最近在听的专辑', imagesEnabled = true }) {
   const frameRef = useRef(null)
+  const hasEnteredViewport = useFirstViewportEntry(frameRef)
   const cardsRef = useRef([])
   const positionRef = useRef(0)
   const targetRef = useRef(0)
@@ -32,7 +34,7 @@ export default function CoverflowCarousel({ slides, label = '最近在听的专�
       const ramp = Math.pow(distance, .56)
       const tilt = Math.min(44 * ramp, 82) * Math.sign(offset)
       card.style.transform = `translateX(calc(-50% + ${offset * pitch}px)) translateZ(${-widthRef.current * .6 * ramp}px) rotateY(${-tilt}deg)`
-      card.style.opacity = distance < count / 2 - .5 ? '1' : '0'
+      card.style.opacity = count <= 2 || distance < count / 2 - .5 ? '1' : '0'
       card.style.zIndex = String(100 - Math.round(distance))
     })
   }, [count])
@@ -67,10 +69,10 @@ export default function CoverflowCarousel({ slides, label = '最近在听的专�
   const nudge = useCallback((by) => settle(Math.round(targetRef.current) + by), [settle])
 
   useEffect(() => {
-    if (isPaused || count < 2) return undefined
+    if (!hasEnteredViewport || isPaused || count < 2) return undefined
     const timer = window.setTimeout(() => nudge(1), 6500)
     return () => window.clearTimeout(timer)
-  }, [count, isPaused, nudge, selected])
+  }, [count, hasEnteredViewport, isPaused, nudge, selected])
 
   useLayoutEffect(() => {
     const frame = frameRef.current
@@ -141,8 +143,8 @@ export default function CoverflowCarousel({ slides, label = '最近在听的专�
         onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={endDrag} onPointerCancel={endDrag}
         onKeyDown={(event) => { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); nudge(event.key === 'ArrowLeft' ? -1 : 1) } }}>
         <div className="coverflow-cards">
-          {slides.map((slide, index) => <div key={slide.title} ref={(node) => { cardsRef.current[index] = node }} className="coverflow-card" role="group" aria-roledescription="slide" aria-label={`${index + 1} / ${count}: ${slide.title}`}>
-            <img src={slide.src} alt={slide.alt} draggable={false} />
+          {slides.map((slide, index) => <div key={slide.id || slide.title} ref={(node) => { cardsRef.current[index] = node }} className="coverflow-card" role="group" aria-roledescription="slide" aria-label={`${index + 1} / ${count}: ${slide.title}`}>
+            <img src={imagesEnabled ? slide.src : undefined} alt={slide.alt} draggable={false} />
           </div>)}
         </div>
       </div>
@@ -150,8 +152,8 @@ export default function CoverflowCarousel({ slides, label = '最近在听的专�
       <button type="button" className="coverflow-next" aria-label="下一张专辑" onClick={() => nudge(1)}><ChevronRight/></button>
     </div>
     <div className="coverflow-caption" aria-live="polite"><strong>{slides[selected]?.title}</strong>{slides[selected]?.subtitle && <span>{slides[selected].subtitle}</span>}</div>
-    <div className={`coverflow-controls${isPaused ? ' is-paused' : ''}`}>
-      <div className="coverflow-pagination" aria-label="选择专辑">{slides.map((slide, index) => <button key={slide.title} type="button" aria-label={`查看 ${slide.title}`} aria-current={index === selected ? 'true' : undefined} onClick={() => goTo(index)} />)}</div>
+    <div className={`coverflow-controls${!hasEnteredViewport || isPaused ? ' is-paused' : ''}`}>
+      <div className="coverflow-pagination" aria-label="选择专辑">{slides.map((slide, index) => <button key={slide.id || slide.title} type="button" aria-label={`查看 ${slide.title}`} aria-current={index === selected ? 'true' : undefined} onClick={() => goTo(index)} />)}</div>
       <button type="button" className="coverflow-playback" aria-label={isPaused ? '继续自动轮播' : '暂停自动轮播'} onClick={() => setIsPaused(paused => !paused)}>{isPaused ? <Play fill="currentColor"/> : <Pause fill="currentColor"/>}</button>
     </div>
   </div>

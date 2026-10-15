@@ -1,0 +1,1751 @@
+{
+  "bilibili": {
+    "date": "2026-10-15",
+    "views": 242754,
+    "fans": 221,
+    "likes": 5087,
+    "saves": 2435,
+    "coins": 516,
+    "comments": 1840,
+    "danmakus": 951,
+    "shares": 591,
+    "video_count": 52,
+    "engagement": 11420
+  },
+  "rednote": {
+    "date": "2026-10-15",
+    "views": 167904,
+    "likes": 6355,
+    "saves": 931,
+    "comments": 1617,
+    "shares": 1406,
+    "fans": 167,
+    "engagement": 10309
+  },
+  "douyin": {
+    "date": "2026-10-15",
+    "views": 39591,
+    "likes": 761,
+    "shares": 78,
+    "comments": 61,
+    "saves": 116,
+    "fans": 14,
+    "engagement": 1016
+  },
+  "kuaishou": {
+    "date": "2026-10-15",
+    "views": 188654,
+    "likes": 856,
+    "shares": 31,
+    "comments": 158,
+    "saves": 81,
+    "fans": 65,
+    "engagement": 1126
+  },
+  "youtube": {
+    "date": "2026-10-15",
+    "views": 7585,
+    "likes": 152,
+    "shares": 11,
+    "comments": 16,
+    "fans": 18,
+    "engagement": 179
+  },
+  "tiktok": {
+    "date": "2026-10-15",
+    "views": 2632,
+    "likes": 107,
+    "saves": 11,
+    "comments": 4,
+    "shares": 1,
+    "fans": 232,
+    "engagement": 123
+  },
+  "instagram": {
+    "date": "2026-10-15",
+    "views": 3097,
+    "likes": 112,
+    "comments": 1,
+    "shares": 6,
+    "fans": 2,
+    "engagement": 119
+  },
+  "apple_music": {
+    "views": 566121,
+    "likes": 12813,
+    "saves": 3252,
+    "coins": 439,
+    "comments": 2460,
+    "danmakus": 904,
+    "shares": 1479,
+    "engagement": 21347
+  },
+  "remake": {
+    "views": 25337,
+    "likes": 1085,
+    "saves": 239,
+    "coins": 67,
+    "comments": 165,
+    "danmakus": 46,
+    "shares": 39,
+    "engagement": 1641
+  },
+  "viral_rate": {
+    "definition": "views >= median_views * 2",
+    "video_count": 379,
+    "median_views": 797,
+    "threshold_views": 1594,
+    "viral_video_count": 139,
+    "rate": 36.68
+  },
+  "viral_works": {
+    "brat_remake": {
+      "title": "BRAT 编曲还原",
+      "query": "360 & (remake | 还原)",
+      "matched_posts": 5,
+      "views": 9173,
+      "likes": 556,
+      "saves": 129,
+      "coins": 51,
+      "comments": 84,
+      "danmakus": 45,
+      "shares": 19,
+      "engagement": 884,
+      "platforms": {
+        "bilibili": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 3980,
+          "likes": 291,
+          "saves": 89,
+          "coins": 51,
+          "comments": 60,
+          "danmakus": 45,
+          "shares": 7,
+          "engagement": 543,
+          "engagement_rate": 13.64
+        },
+        "rednote": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 1580,
+          "likes": 225,
+          "saves": 39,
+          "coins": 0,
+          "comments": 20,
+          "danmakus": 0,
+          "shares": 12,
+          "engagement": 296,
+          "engagement_rate": 18.73
+        },
+        "douyin": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 139,
+          "likes": 12,
+          "saves": 1,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 13,
+          "engagement_rate": 9.35
+        },
+        "kuaishou": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 3094,
+          "likes": 17,
+          "saves": 0,
+          "coins": 0,
+          "comments": 4,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 21,
+          "engagement_rate": 0.68
+        },
+        "youtube": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 380,
+          "likes": 11,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 11,
+          "engagement_rate": 2.89
+        }
+      },
+      "engagement_rate": 9.64
+    },
+    "apple_music_animated_cover_ep1": {
+      "title": "Apple Music 动态封面 Ep1",
+      "query": "Apple Music & (Ep 1 | Ep. 1 | Ep1)",
+      "matched_posts": 7,
+      "views": 29409,
+      "likes": 410,
+      "saves": 97,
+      "coins": 14,
+      "comments": 112,
+      "danmakus": 9,
+      "shares": 27,
+      "engagement": 669,
+      "platforms": {
+        "bilibili": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 16003,
+          "likes": 156,
+          "saves": 77,
+          "coins": 14,
+          "comments": 87,
+          "danmakus": 9,
+          "shares": 12,
+          "engagement": 355,
+          "engagement_rate": 2.22
+        },
+        "rednote": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 690,
+          "likes": 16,
+          "saves": 1,
+          "coins": 0,
+          "comments": 4,
+          "danmakus": 0,
+          "shares": 1,
+          "engagement": 22,
+          "engagement_rate": 3.19
+        },
+        "douyin": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 6712,
+          "likes": 113,
+          "saves": 8,
+          "coins": 0,
+          "comments": 13,
+          "danmakus": 0,
+          "shares": 9,
+          "engagement": 143,
+          "engagement_rate": 2.13
+        },
+        "kuaishou": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 2985,
+          "likes": 9,
+          "saves": 0,
+          "coins": 0,
+          "comments": 4,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 13,
+          "engagement_rate": 0.44
+        },
+        "youtube": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 378,
+          "likes": 6,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 4,
+          "engagement": 10,
+          "engagement_rate": 2.65
+        },
+        "tiktok": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 2632,
+          "likes": 107,
+          "saves": 11,
+          "coins": 0,
+          "comments": 4,
+          "danmakus": 0,
+          "shares": 1,
+          "engagement": 123,
+          "engagement_rate": 4.67
+        },
+        "instagram": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 9,
+          "likes": 3,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 3,
+          "engagement_rate": 33.33
+        }
+      },
+      "engagement_rate": 2.27
+    },
+    "apple_music_ai_cover": {
+      "title": "Apple Music AI 封面",
+      "query": "Apple Music & AI",
+      "matched_posts": 7,
+      "views": 40662,
+      "likes": 380,
+      "saves": 146,
+      "coins": 16,
+      "comments": 114,
+      "danmakus": 271,
+      "shares": 127,
+      "engagement": 1054,
+      "platforms": {
+        "bilibili": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 34295,
+          "likes": 319,
+          "saves": 132,
+          "coins": 16,
+          "comments": 102,
+          "danmakus": 271,
+          "shares": 110,
+          "engagement": 950,
+          "engagement_rate": 2.77
+        },
+        "rednote": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 1626,
+          "likes": 34,
+          "saves": 8,
+          "coins": 0,
+          "comments": 4,
+          "danmakus": 0,
+          "shares": 14,
+          "engagement": 60,
+          "engagement_rate": 3.69
+        },
+        "douyin": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 954,
+          "likes": 10,
+          "saves": 3,
+          "coins": 0,
+          "comments": 3,
+          "danmakus": 0,
+          "shares": 3,
+          "engagement": 19,
+          "engagement_rate": 1.99
+        },
+        "kuaishou": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 3066,
+          "likes": 8,
+          "saves": 0,
+          "coins": 0,
+          "comments": 4,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 12,
+          "engagement_rate": 0.39
+        },
+        "youtube": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 38,
+          "likes": 2,
+          "saves": 0,
+          "coins": 0,
+          "comments": 1,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 3,
+          "engagement_rate": 7.89
+        },
+        "tiktok": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 399,
+          "likes": 4,
+          "saves": 3,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 7,
+          "engagement_rate": 1.75
+        },
+        "instagram": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 284,
+          "likes": 3,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 3,
+          "engagement_rate": 1.06
+        }
+      },
+      "engagement_rate": 2.59
+    },
+    "apple_music_artist_page_1": {
+      "title": "Apple Music 歌手页面 1",
+      "query": "Apple Music & (歌手新页面1 | 歌手新页面集合1 | New Artist Page 1)",
+      "matched_posts": 7,
+      "views": 22940,
+      "likes": 368,
+      "saves": 117,
+      "coins": 7,
+      "comments": 149,
+      "danmakus": 78,
+      "shares": 68,
+      "engagement": 787,
+      "platforms": {
+        "bilibili": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 18283,
+          "likes": 236,
+          "saves": 101,
+          "coins": 7,
+          "comments": 138,
+          "danmakus": 78,
+          "shares": 56,
+          "engagement": 616,
+          "engagement_rate": 3.37
+        },
+        "rednote": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 682,
+          "likes": 26,
+          "saves": 2,
+          "coins": 0,
+          "comments": 6,
+          "danmakus": 0,
+          "shares": 6,
+          "engagement": 40,
+          "engagement_rate": 5.87
+        },
+        "douyin": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 350,
+          "likes": 4,
+          "saves": 1,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 5,
+          "engagement_rate": 1.43
+        },
+        "kuaishou": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 844,
+          "likes": 8,
+          "saves": 0,
+          "coins": 0,
+          "comments": 2,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 10,
+          "engagement_rate": 1.18
+        },
+        "youtube": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 87,
+          "likes": 3,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 3,
+          "engagement_rate": 3.45
+        },
+        "tiktok": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 2583,
+          "likes": 87,
+          "saves": 13,
+          "coins": 0,
+          "comments": 2,
+          "danmakus": 0,
+          "shares": 6,
+          "engagement": 108,
+          "engagement_rate": 4.18
+        },
+        "instagram": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 111,
+          "likes": 4,
+          "saves": 0,
+          "coins": 0,
+          "comments": 1,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 5,
+          "engagement_rate": 4.5
+        }
+      },
+      "engagement_rate": 3.43
+    },
+    "apple_music_classical_artist_page": {
+      "title": "Apple Music 音乐家页面",
+      "query": "Apple Music & (音乐家 | Classical)",
+      "matched_posts": 7,
+      "views": 79245,
+      "likes": 3994,
+      "saves": 1322,
+      "coins": 111,
+      "comments": 629,
+      "danmakus": 215,
+      "shares": 833,
+      "engagement": 7104,
+      "platforms": {
+        "bilibili": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 49049,
+          "likes": 2039,
+          "saves": 1055,
+          "coins": 111,
+          "comments": 443,
+          "danmakus": 215,
+          "shares": 232,
+          "engagement": 4095,
+          "engagement_rate": 8.35
+        },
+        "rednote": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 26699,
+          "likes": 1913,
+          "saves": 265,
+          "coins": 0,
+          "comments": 184,
+          "danmakus": 0,
+          "shares": 597,
+          "engagement": 2959,
+          "engagement_rate": 11.08
+        },
+        "douyin": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 110,
+          "likes": 4,
+          "saves": 1,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 5,
+          "engagement_rate": 4.55
+        },
+        "kuaishou": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 2115,
+          "likes": 14,
+          "saves": 0,
+          "coins": 0,
+          "comments": 2,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 16,
+          "engagement_rate": 0.76
+        },
+        "youtube": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 797,
+          "likes": 4,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 4,
+          "engagement_rate": 0.5
+        },
+        "tiktok": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 352,
+          "likes": 14,
+          "saves": 1,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 4,
+          "engagement": 19,
+          "engagement_rate": 5.4
+        },
+        "instagram": {
+          "date": "2026-10-15",
+          "matched_posts": 1,
+          "views": 123,
+          "likes": 6,
+          "saves": 0,
+          "coins": 0,
+          "comments": 0,
+          "danmakus": 0,
+          "shares": 0,
+          "engagement": 6,
+          "engagement_rate": 4.88
+        }
+      },
+      "engagement_rate": 8.96
+    }
+  },
+  "total": {
+    "views": 652217,
+    "fans": 719,
+    "likes": 13430,
+    "saves": 3574,
+    "coins": 516,
+    "comments": 3697,
+    "danmakus": 951,
+    "shares": 2124,
+    "video_count": 52,
+    "engagement": 24292
+  },
+  "follower_growth": {
+    "days": 30,
+    "platforms": {
+      "bilibili": {
+        "download_date": "2026-10-15",
+        "start_date": "2026-09-15",
+        "end_date": "2026-10-14",
+        "source": "bilibili/2026-10-15/account.csv",
+        "views_source": "bilibili/2026-10-15/account.csv",
+        "overseas_date_shift_days": 0,
+        "increment_data_available": true,
+        "history": [
+          {
+            "date": "2026-09-15",
+            "fans": 160,
+            "views": 151436
+          },
+          {
+            "date": "2026-09-16",
+            "fans": 162,
+            "views": 155933
+          },
+          {
+            "date": "2026-09-17",
+            "fans": 163,
+            "views": 157905
+          },
+          {
+            "date": "2026-09-18",
+            "fans": 170,
+            "views": 181117
+          },
+          {
+            "date": "2026-09-19",
+            "fans": 180,
+            "views": 190889
+          },
+          {
+            "date": "2026-09-20",
+            "fans": 183,
+            "views": 196702
+          },
+          {
+            "date": "2026-09-21",
+            "fans": 187,
+            "views": 200416
+          },
+          {
+            "date": "2026-09-22",
+            "fans": 188,
+            "views": 203125
+          },
+          {
+            "date": "2026-09-23",
+            "fans": 191,
+            "views": 205183
+          },
+          {
+            "date": "2026-09-24",
+            "fans": 195,
+            "views": 207676
+          },
+          {
+            "date": "2026-09-25",
+            "fans": 197,
+            "views": 210277
+          },
+          {
+            "date": "2026-09-26",
+            "fans": 198,
+            "views": 212155
+          },
+          {
+            "date": "2026-09-27",
+            "fans": 199,
+            "views": 213576
+          },
+          {
+            "date": "2026-09-28",
+            "fans": 200,
+            "views": 214696
+          },
+          {
+            "date": "2026-09-29",
+            "fans": 205,
+            "views": 217659
+          },
+          {
+            "date": "2026-09-30",
+            "fans": 207,
+            "views": 220462
+          },
+          {
+            "date": "2026-10-01",
+            "fans": 207,
+            "views": 222314
+          },
+          {
+            "date": "2026-10-02",
+            "fans": 208,
+            "views": 225255
+          },
+          {
+            "date": "2026-10-03",
+            "fans": 212,
+            "views": 227478
+          },
+          {
+            "date": "2026-10-04",
+            "fans": 213,
+            "views": 229384
+          },
+          {
+            "date": "2026-10-05",
+            "fans": 212,
+            "views": 230999
+          },
+          {
+            "date": "2026-10-06",
+            "fans": 214,
+            "views": 232373
+          },
+          {
+            "date": "2026-10-07",
+            "fans": 214,
+            "views": 233427
+          },
+          {
+            "date": "2026-10-08",
+            "fans": 215,
+            "views": 234228
+          },
+          {
+            "date": "2026-10-09",
+            "fans": 216,
+            "views": 235354
+          },
+          {
+            "date": "2026-10-10",
+            "fans": 216,
+            "views": 236497
+          },
+          {
+            "date": "2026-10-11",
+            "fans": 217,
+            "views": 237914
+          },
+          {
+            "date": "2026-10-12",
+            "fans": 220,
+            "views": 239844
+          },
+          {
+            "date": "2026-10-13",
+            "fans": 221,
+            "views": 241717
+          },
+          {
+            "date": "2026-10-14",
+            "fans": 221,
+            "views": 242754
+          }
+        ]
+      },
+      "rednote": {
+        "download_date": "2026-10-15",
+        "start_date": "2026-09-15",
+        "end_date": "2026-10-14",
+        "source": "rednote/2026-10-15/fans.xlsx",
+        "views_source": "rednote/2026-10-15/views.xlsx",
+        "overseas_date_shift_days": 0,
+        "increment_data_available": true,
+        "history": [
+          {
+            "date": "2026-09-15",
+            "fans": 154,
+            "views": 130477
+          },
+          {
+            "date": "2026-09-16",
+            "fans": 157,
+            "views": 142319
+          },
+          {
+            "date": "2026-09-17",
+            "fans": 158,
+            "views": 148693
+          },
+          {
+            "date": "2026-09-18",
+            "fans": 159,
+            "views": 151694
+          },
+          {
+            "date": "2026-09-19",
+            "fans": 160,
+            "views": 154228
+          },
+          {
+            "date": "2026-09-20",
+            "fans": 161,
+            "views": 155043
+          },
+          {
+            "date": "2026-09-21",
+            "fans": 161,
+            "views": 155554
+          },
+          {
+            "date": "2026-09-22",
+            "fans": 162,
+            "views": 156002
+          },
+          {
+            "date": "2026-09-23",
+            "fans": 162,
+            "views": 156463
+          },
+          {
+            "date": "2026-09-24",
+            "fans": 162,
+            "views": 156955
+          },
+          {
+            "date": "2026-09-25",
+            "fans": 162,
+            "views": 157523
+          },
+          {
+            "date": "2026-09-26",
+            "fans": 162,
+            "views": 157862
+          },
+          {
+            "date": "2026-09-27",
+            "fans": 162,
+            "views": 158151
+          },
+          {
+            "date": "2026-09-28",
+            "fans": 162,
+            "views": 158338
+          },
+          {
+            "date": "2026-09-29",
+            "fans": 162,
+            "views": 159234
+          },
+          {
+            "date": "2026-09-30",
+            "fans": 162,
+            "views": 159647
+          },
+          {
+            "date": "2026-10-01",
+            "fans": 162,
+            "views": 159994
+          },
+          {
+            "date": "2026-10-02",
+            "fans": 162,
+            "views": 160334
+          },
+          {
+            "date": "2026-10-03",
+            "fans": 162,
+            "views": 160611
+          },
+          {
+            "date": "2026-10-04",
+            "fans": 162,
+            "views": 160823
+          },
+          {
+            "date": "2026-10-05",
+            "fans": 162,
+            "views": 160952
+          },
+          {
+            "date": "2026-10-06",
+            "fans": 162,
+            "views": 161119
+          },
+          {
+            "date": "2026-10-07",
+            "fans": 162,
+            "views": 161276
+          },
+          {
+            "date": "2026-10-08",
+            "fans": 163,
+            "views": 161424
+          },
+          {
+            "date": "2026-10-09",
+            "fans": 164,
+            "views": 162231
+          },
+          {
+            "date": "2026-10-10",
+            "fans": 165,
+            "views": 164665
+          },
+          {
+            "date": "2026-10-11",
+            "fans": 165,
+            "views": 165934
+          },
+          {
+            "date": "2026-10-12",
+            "fans": 165,
+            "views": 166484
+          },
+          {
+            "date": "2026-10-13",
+            "fans": 167,
+            "views": 167432
+          },
+          {
+            "date": "2026-10-14",
+            "fans": 167,
+            "views": 167904
+          }
+        ]
+      },
+      "douyin": {
+        "download_date": "2026-10-15",
+        "start_date": "2026-09-15",
+        "end_date": "2026-10-14",
+        "source": "douyin/2026-10-15/fans.xlsx",
+        "views_source": "douyin/2026-10-15/views & engagement.xlsx",
+        "overseas_date_shift_days": 0,
+        "increment_data_available": true,
+        "history": [
+          {
+            "date": "2026-09-15",
+            "fans": 13,
+            "views": 37639
+          },
+          {
+            "date": "2026-09-16",
+            "fans": 13,
+            "views": 37931
+          },
+          {
+            "date": "2026-09-17",
+            "fans": 13,
+            "views": 38116
+          },
+          {
+            "date": "2026-09-18",
+            "fans": 13,
+            "views": 38231
+          },
+          {
+            "date": "2026-09-19",
+            "fans": 13,
+            "views": 38384
+          },
+          {
+            "date": "2026-09-20",
+            "fans": 14,
+            "views": 38576
+          },
+          {
+            "date": "2026-09-21",
+            "fans": 14,
+            "views": 38840
+          },
+          {
+            "date": "2026-09-22",
+            "fans": 14,
+            "views": 38895
+          },
+          {
+            "date": "2026-09-23",
+            "fans": 14,
+            "views": 38921
+          },
+          {
+            "date": "2026-09-24",
+            "fans": 14,
+            "views": 38946
+          },
+          {
+            "date": "2026-09-25",
+            "fans": 14,
+            "views": 38974
+          },
+          {
+            "date": "2026-09-26",
+            "fans": 14,
+            "views": 38996
+          },
+          {
+            "date": "2026-09-27",
+            "fans": 14,
+            "views": 39009
+          },
+          {
+            "date": "2026-09-28",
+            "fans": 14,
+            "views": 39016
+          },
+          {
+            "date": "2026-09-29",
+            "fans": 14,
+            "views": 39025
+          },
+          {
+            "date": "2026-09-30",
+            "fans": 14,
+            "views": 39085
+          },
+          {
+            "date": "2026-10-01",
+            "fans": 14,
+            "views": 39137
+          },
+          {
+            "date": "2026-10-02",
+            "fans": 14,
+            "views": 39165
+          },
+          {
+            "date": "2026-10-03",
+            "fans": 14,
+            "views": 39177
+          },
+          {
+            "date": "2026-10-04",
+            "fans": 14,
+            "views": 39201
+          },
+          {
+            "date": "2026-10-05",
+            "fans": 14,
+            "views": 39215
+          },
+          {
+            "date": "2026-10-06",
+            "fans": 14,
+            "views": 39231
+          },
+          {
+            "date": "2026-10-07",
+            "fans": 14,
+            "views": 39267
+          },
+          {
+            "date": "2026-10-08",
+            "fans": 14,
+            "views": 39278
+          },
+          {
+            "date": "2026-10-09",
+            "fans": 14,
+            "views": 39310
+          },
+          {
+            "date": "2026-10-10",
+            "fans": 14,
+            "views": 39351
+          },
+          {
+            "date": "2026-10-11",
+            "fans": 14,
+            "views": 39377
+          },
+          {
+            "date": "2026-10-12",
+            "fans": 14,
+            "views": 39490
+          },
+          {
+            "date": "2026-10-13",
+            "fans": 14,
+            "views": 39546
+          },
+          {
+            "date": "2026-10-14",
+            "fans": 14,
+            "views": 39591
+          }
+        ]
+      },
+      "kuaishou": {
+        "download_date": "2026-10-15",
+        "start_date": "2026-09-15",
+        "end_date": "2026-10-14",
+        "source": "kuaishou/2026-10-15/account.xlsx",
+        "views_source": "kuaishou/2026-10-15/account.xlsx",
+        "overseas_date_shift_days": 0,
+        "increment_data_available": true,
+        "history": [
+          {
+            "date": "2026-09-15",
+            "fans": 57,
+            "views": 172169
+          },
+          {
+            "date": "2026-09-16",
+            "fans": 59,
+            "views": 173885
+          },
+          {
+            "date": "2026-09-17",
+            "fans": 60,
+            "views": 173896
+          },
+          {
+            "date": "2026-09-18",
+            "fans": 61,
+            "views": 173904
+          },
+          {
+            "date": "2026-09-19",
+            "fans": 63,
+            "views": 175424
+          },
+          {
+            "date": "2026-09-20",
+            "fans": 63,
+            "views": 175769
+          },
+          {
+            "date": "2026-09-21",
+            "fans": 65,
+            "views": 176585
+          },
+          {
+            "date": "2026-09-22",
+            "fans": 65,
+            "views": 177058
+          },
+          {
+            "date": "2026-09-23",
+            "fans": 65,
+            "views": 177655
+          },
+          {
+            "date": "2026-09-24",
+            "fans": 64,
+            "views": 179526
+          },
+          {
+            "date": "2026-09-25",
+            "fans": 62,
+            "views": 179639
+          },
+          {
+            "date": "2026-09-26",
+            "fans": 62,
+            "views": 179640
+          },
+          {
+            "date": "2026-09-27",
+            "fans": 60,
+            "views": 179642
+          },
+          {
+            "date": "2026-09-28",
+            "fans": 59,
+            "views": 179643
+          },
+          {
+            "date": "2026-09-29",
+            "fans": 60,
+            "views": 180704
+          },
+          {
+            "date": "2026-09-30",
+            "fans": 61,
+            "views": 181762
+          },
+          {
+            "date": "2026-10-01",
+            "fans": 63,
+            "views": 184066
+          },
+          {
+            "date": "2026-10-02",
+            "fans": 64,
+            "views": 184739
+          },
+          {
+            "date": "2026-10-03",
+            "fans": 64,
+            "views": 184744
+          },
+          {
+            "date": "2026-10-04",
+            "fans": 63,
+            "views": 184747
+          },
+          {
+            "date": "2026-10-05",
+            "fans": 63,
+            "views": 184751
+          },
+          {
+            "date": "2026-10-06",
+            "fans": 62,
+            "views": 184755
+          },
+          {
+            "date": "2026-10-07",
+            "fans": 61,
+            "views": 184755
+          },
+          {
+            "date": "2026-10-08",
+            "fans": 60,
+            "views": 184756
+          },
+          {
+            "date": "2026-10-09",
+            "fans": 60,
+            "views": 185073
+          },
+          {
+            "date": "2026-10-10",
+            "fans": 61,
+            "views": 186130
+          },
+          {
+            "date": "2026-10-11",
+            "fans": 61,
+            "views": 186449
+          },
+          {
+            "date": "2026-10-12",
+            "fans": 61,
+            "views": 186984
+          },
+          {
+            "date": "2026-10-13",
+            "fans": 63,
+            "views": 188041
+          },
+          {
+            "date": "2026-10-14",
+            "fans": 65,
+            "views": 188654
+          }
+        ]
+      },
+      "youtube": {
+        "download_date": "2026-10-15",
+        "start_date": "2026-09-15",
+        "end_date": "2026-10-14",
+        "source": "YouTube/2026-10-15/account.csv",
+        "views_source": "YouTube/2026-10-15/account.csv",
+        "overseas_date_shift_days": 1,
+        "increment_data_available": true,
+        "history": [
+          {
+            "date": "2026-09-15",
+            "fans": 13,
+            "views": 4561
+          },
+          {
+            "date": "2026-09-16",
+            "fans": 13,
+            "views": 4651
+          },
+          {
+            "date": "2026-09-17",
+            "fans": 13,
+            "views": 4743
+          },
+          {
+            "date": "2026-09-18",
+            "fans": 13,
+            "views": 4805
+          },
+          {
+            "date": "2026-09-19",
+            "fans": 13,
+            "views": 5027
+          },
+          {
+            "date": "2026-09-20",
+            "fans": 14,
+            "views": 5481
+          },
+          {
+            "date": "2026-09-21",
+            "fans": 14,
+            "views": 5842
+          },
+          {
+            "date": "2026-09-22",
+            "fans": 15,
+            "views": 6167
+          },
+          {
+            "date": "2026-09-23",
+            "fans": 15,
+            "views": 6503
+          },
+          {
+            "date": "2026-09-24",
+            "fans": 16,
+            "views": 6740
+          },
+          {
+            "date": "2026-09-25",
+            "fans": 16,
+            "views": 6784
+          },
+          {
+            "date": "2026-09-26",
+            "fans": 16,
+            "views": 6853
+          },
+          {
+            "date": "2026-09-27",
+            "fans": 16,
+            "views": 6900
+          },
+          {
+            "date": "2026-09-28",
+            "fans": 16,
+            "views": 6953
+          },
+          {
+            "date": "2026-09-29",
+            "fans": 16,
+            "views": 6985
+          },
+          {
+            "date": "2026-09-30",
+            "fans": 16,
+            "views": 7020
+          },
+          {
+            "date": "2026-10-01",
+            "fans": 16,
+            "views": 7052
+          },
+          {
+            "date": "2026-10-02",
+            "fans": 16,
+            "views": 7078
+          },
+          {
+            "date": "2026-10-03",
+            "fans": 16,
+            "views": 7135
+          },
+          {
+            "date": "2026-10-04",
+            "fans": 17,
+            "views": 7242
+          },
+          {
+            "date": "2026-10-05",
+            "fans": 17,
+            "views": 7317
+          },
+          {
+            "date": "2026-10-06",
+            "fans": 17,
+            "views": 7326
+          },
+          {
+            "date": "2026-10-07",
+            "fans": 17,
+            "views": 7343
+          },
+          {
+            "date": "2026-10-08",
+            "fans": 17,
+            "views": 7368
+          },
+          {
+            "date": "2026-10-09",
+            "fans": 17,
+            "views": 7384
+          },
+          {
+            "date": "2026-10-10",
+            "fans": 17,
+            "views": 7402
+          },
+          {
+            "date": "2026-10-11",
+            "fans": 18,
+            "views": 7453
+          },
+          {
+            "date": "2026-10-12",
+            "fans": 18,
+            "views": 7485
+          },
+          {
+            "date": "2026-10-13",
+            "fans": 18,
+            "views": 7526
+          },
+          {
+            "date": "2026-10-14",
+            "fans": 18,
+            "views": 7585
+          }
+        ]
+      },
+      "tiktok": {
+        "download_date": "2026-10-15",
+        "start_date": "2026-09-15",
+        "end_date": "2026-10-14",
+        "source": "TikTok/2026-10-15/account.xlsx",
+        "views_source": "TikTok/2026-10-15/account.xlsx",
+        "overseas_date_shift_days": 1,
+        "increment_data_available": false,
+        "history": [
+          {
+            "date": "2026-09-15",
+            "fans": 232,
+            "views": -7956
+          },
+          {
+            "date": "2026-09-16",
+            "fans": 232,
+            "views": -6568
+          },
+          {
+            "date": "2026-09-17",
+            "fans": 232,
+            "views": -5286
+          },
+          {
+            "date": "2026-09-18",
+            "fans": 232,
+            "views": -4838
+          },
+          {
+            "date": "2026-09-19",
+            "fans": 232,
+            "views": -4591
+          },
+          {
+            "date": "2026-09-20",
+            "fans": 232,
+            "views": -4093
+          },
+          {
+            "date": "2026-09-21",
+            "fans": 232,
+            "views": -3639
+          },
+          {
+            "date": "2026-09-22",
+            "fans": 232,
+            "views": -3307
+          },
+          {
+            "date": "2026-09-23",
+            "fans": 232,
+            "views": -3108
+          },
+          {
+            "date": "2026-09-24",
+            "fans": 232,
+            "views": -2932
+          },
+          {
+            "date": "2026-09-25",
+            "fans": 232,
+            "views": -2781
+          },
+          {
+            "date": "2026-09-26",
+            "fans": 232,
+            "views": -2643
+          },
+          {
+            "date": "2026-09-27",
+            "fans": 232,
+            "views": -2516
+          },
+          {
+            "date": "2026-09-28",
+            "fans": 232,
+            "views": -2269
+          },
+          {
+            "date": "2026-09-29",
+            "fans": 232,
+            "views": -2121
+          },
+          {
+            "date": "2026-09-30",
+            "fans": 232,
+            "views": -1272
+          },
+          {
+            "date": "2026-10-01",
+            "fans": 232,
+            "views": -770
+          },
+          {
+            "date": "2026-10-02",
+            "fans": 232,
+            "views": -615
+          },
+          {
+            "date": "2026-10-03",
+            "fans": 232,
+            "views": -479
+          },
+          {
+            "date": "2026-10-04",
+            "fans": 232,
+            "views": -285
+          },
+          {
+            "date": "2026-10-05",
+            "fans": 232,
+            "views": 82
+          },
+          {
+            "date": "2026-10-06",
+            "fans": 232,
+            "views": 291
+          },
+          {
+            "date": "2026-10-07",
+            "fans": 232,
+            "views": 458
+          },
+          {
+            "date": "2026-10-08",
+            "fans": 232,
+            "views": 607
+          },
+          {
+            "date": "2026-10-09",
+            "fans": 232,
+            "views": 764
+          },
+          {
+            "date": "2026-10-10",
+            "fans": 232,
+            "views": 848
+          },
+          {
+            "date": "2026-10-11",
+            "fans": 232,
+            "views": 955
+          },
+          {
+            "date": "2026-10-12",
+            "fans": 232,
+            "views": 1079
+          },
+          {
+            "date": "2026-10-13",
+            "fans": 232,
+            "views": 1837
+          },
+          {
+            "date": "2026-10-14",
+            "fans": 232,
+            "views": 2632
+          }
+        ]
+      }
+    },
+    "total": [
+      {
+        "date": "2026-09-15",
+        "fans": 629,
+        "views": 488326
+      },
+      {
+        "date": "2026-09-16",
+        "fans": 636,
+        "views": 508151
+      },
+      {
+        "date": "2026-09-17",
+        "fans": 639,
+        "views": 518067
+      },
+      {
+        "date": "2026-09-18",
+        "fans": 648,
+        "views": 544913
+      },
+      {
+        "date": "2026-09-19",
+        "fans": 661,
+        "views": 559361
+      },
+      {
+        "date": "2026-09-20",
+        "fans": 667,
+        "views": 567478
+      },
+      {
+        "date": "2026-09-21",
+        "fans": 673,
+        "views": 573598
+      },
+      {
+        "date": "2026-09-22",
+        "fans": 676,
+        "views": 577940
+      },
+      {
+        "date": "2026-09-23",
+        "fans": 679,
+        "views": 581617
+      },
+      {
+        "date": "2026-09-24",
+        "fans": 683,
+        "views": 586911
+      },
+      {
+        "date": "2026-09-25",
+        "fans": 683,
+        "views": 590416
+      },
+      {
+        "date": "2026-09-26",
+        "fans": 684,
+        "views": 592863
+      },
+      {
+        "date": "2026-09-27",
+        "fans": 683,
+        "views": 594762
+      },
+      {
+        "date": "2026-09-28",
+        "fans": 683,
+        "views": 596377
+      },
+      {
+        "date": "2026-09-29",
+        "fans": 689,
+        "views": 601486
+      },
+      {
+        "date": "2026-09-30",
+        "fans": 692,
+        "views": 606704
+      },
+      {
+        "date": "2026-10-01",
+        "fans": 694,
+        "views": 611793
+      },
+      {
+        "date": "2026-10-02",
+        "fans": 696,
+        "views": 615956
+      },
+      {
+        "date": "2026-10-03",
+        "fans": 700,
+        "views": 618666
+      },
+      {
+        "date": "2026-10-04",
+        "fans": 701,
+        "views": 621112
+      },
+      {
+        "date": "2026-10-05",
+        "fans": 700,
+        "views": 623316
+      },
+      {
+        "date": "2026-10-06",
+        "fans": 701,
+        "views": 625095
+      },
+      {
+        "date": "2026-10-07",
+        "fans": 700,
+        "views": 626526
+      },
+      {
+        "date": "2026-10-08",
+        "fans": 701,
+        "views": 627661
+      },
+      {
+        "date": "2026-10-09",
+        "fans": 703,
+        "views": 630116
+      },
+      {
+        "date": "2026-10-10",
+        "fans": 705,
+        "views": 634893
+      },
+      {
+        "date": "2026-10-11",
+        "fans": 707,
+        "views": 638082
+      },
+      {
+        "date": "2026-10-12",
+        "fans": 710,
+        "views": 641366
+      },
+      {
+        "date": "2026-10-13",
+        "fans": 715,
+        "views": 646099
+      },
+      {
+        "date": "2026-10-14",
+        "fans": 717,
+        "views": 649120
+      }
+    ],
+    "warnings": [
+      "tiktok: '/Users/pyh/Documents/Program/My Site/data/TikTok/2026-10-15/account.xlsx 缺少数值列（支持: Followers gained, Net followers, New followers, Followers, 粉丝净增, 净增粉丝, 新增粉丝, 净涨粉）'；30 日内暂按 0 增量计算"
+    ]
+  },
+  "updatedAt": "2026-10-15T07:27:24.533Z"
+}

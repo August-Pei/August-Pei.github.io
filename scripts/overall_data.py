@@ -6,12 +6,13 @@ overall_data.py
 读取各平台最新日期文件夹下的数据，输出为 JSON：
   - data/bilibili/<date>/account.csv     -> 累计数据
   - data/rednote/<date>/notes.xlsx       -> 总计行
-  - data/douyin/<date>/videos.xlsx       -> 总计行
+  - data/douyin/<date>/videos.xlsx       -> 总计行；不存在时加总视频明细
   - data/douyin/<date>/fans.xlsx         -> 最后一行日期的总粉丝量
-  - data/kuaishou/<date>/videos.xlsx     -> 总计行（找不到则读 videos.csv）
+  - data/kuaishou/<date>/videos.xlsx     -> 收藏/转发/粉丝读总计行，其余加总视频
+                                          （无 xlsx 时读 videos.csv）
   - data/YouTube/<date>/videos.csv       -> 第二行 Total 行
-  - data/TikTok/<date>/videos.xlsx       -> 最后一行总计
-  - data/Instagram/<date>/videos.csv     -> 最后一行（All 行）
+  - data/TikTok/<date>/videos.xlsx       -> 粉丝取“粉丝数”列首条数据，其余取最后一行总计
+  - data/Instagram/<date>/videos.xlsx/csv     -> shares/fans 读最后一行 All，其余加总视频
 每个平台带有各自的 date 字段，date 取自对应数据文件夹名。
 最后额外输出 "total" 字段：对所有平台同名字段求和，并给出 engagement 互动总量。
 同时输出两个由各平台视频明细重新计算的内容系列汇总：
@@ -344,15 +345,15 @@ def read_douyin_data() -> dict[str, Any]:
     v_index = {name: i for i, name in enumerate(v_header)}
     v_total_row = find_total_row(v_rows)
 
-    if v_total_row is None:
-        raise ValueError(f"videos.xlsx 中未找到'总计'行: {videos_path}")
-
     for cn, en in DOUYIN_VIDEO_FIELD_MAPPING.items():
         if cn not in v_index:
             result[en] = 0
             continue
         idx = v_index[cn]
-        value = v_total_row[idx] if idx < len(v_total_row) else None
+        if v_total_row is None:
+            value = sum(to_int(row[idx]) for row in v_rows[1:] if idx < len(row))
+        else:
+            value = v_total_row[idx] if idx < len(v_total_row) else None
         result[en] = to_int(value)
 
     # --- fans.xlsx ---
@@ -440,11 +441,17 @@ def read_kuaishou_data() -> dict[str, Any]:
         if idx is None and out_field == "fans":
             idx = len(header) - 1
 
-        if idx is None or idx >= len(total_row):
+        if idx is None:
             result[out_field] = 0
             continue
 
-        result[out_field] = to_int(total_row[idx])
+        if out_field in ("saves", "shares", "fans"):
+            result[out_field] = to_int(total_row[idx]) if idx < len(total_row) else 0
+        else:
+            result[out_field] = sum(
+                to_int(row[idx]) for row in rows[1:]
+                if row is not total_row and idx < len(row)
+            )
 
     return result
 
@@ -480,7 +487,7 @@ def read_youtube_data() -> dict[str, Any]:
 # ---------- TikTok ----------
 
 def read_tiktok_data() -> dict[str, Any]:
-    """读取 data/TikTok 下最晚日期文件夹中的 videos.xlsx（最后一行总计）。"""
+    """粉丝读取“粉丝数”列首条数据，其余指标沿用最后一行总计。"""
     latest_dir = find_latest_dir(TIKTOK_DIR)
     xlsx_path = latest_dir / "videos.xlsx"
 
@@ -516,11 +523,16 @@ def read_tiktok_data() -> dict[str, Any]:
     result: dict[str, Any] = {"date": latest_dir.name}
 
     for out_field, aliases in TIKTOK_COLUMN_ALIASES.items():
-        idx = find_column(header, aliases)
+        if out_field == "fans":
+            idx = find_column(header, ["粉丝数"])
+            first_row = rows[1] if len(rows) > 1 else ()
+            result[out_field] = (
+                to_int(first_row[idx])
+                if idx is not None and idx < len(first_row) else 0
+            )
+            continue
 
-        # 找不到列名时，fans 兜底取最后一列
-        if idx is None and out_field == "fans":
-            idx = len(header) - 1
+        idx = find_column(header, aliases)
 
         if idx is None:
             result[out_field] = 0
@@ -540,16 +552,17 @@ def read_tiktok_data() -> dict[str, Any]:
 # ---------- Instagram ----------
 
 def read_instagram_data() -> dict[str, Any]:
-    """读取 data/Instagram 下最晚日期文件夹中的 videos.csv（最后一行 All 行）。"""
+    """shares/fans 读取最后的 All 行，播放/点赞/评论加总视频明细。"""
     latest_dir = find_latest_dir(INSTAGRAM_DIR)
-    csv_path = latest_dir / "videos.csv"
+    table_path = next((latest_dir / name for name in ("videos.xlsx", "videos.csv")
+                       if (latest_dir / name).is_file()), None)
 
-    if not csv_path.is_file():
-        raise FileNotFoundError(f"未找到 videos.csv: {csv_path}")
+    if table_path is None:
+        raise FileNotFoundError(f"未找到 videos.xlsx / videos.csv: {latest_dir}")
 
-    rows = load_csv_rows(csv_path)
+    rows = load_sheet_rows(table_path) if table_path.suffix.lower() == ".xlsx" else load_csv_rows(table_path)
     if len(rows) < 2:
-        raise ValueError(f"videos.csv 数据不足: {csv_path}")
+        raise ValueError(f"Instagram 视频表数据不足: {table_path}")
 
     header = [str(c).strip() if c is not None else "" for c in rows[0]]
     total_row = rows[-1]  # 最后一行（All 行）
@@ -558,10 +571,15 @@ def read_instagram_data() -> dict[str, Any]:
 
     for out_field, aliases in INSTAGRAM_COLUMN_ALIASES.items():
         idx = find_column(header, aliases)
-        if idx is None or idx >= len(total_row):
+        if idx is None:
             result[out_field] = 0
             continue
-        result[out_field] = to_int(total_row[idx])
+        if out_field in ("shares", "fans"):
+            result[out_field] = to_int(total_row[idx]) if idx < len(total_row) else 0
+        else:
+            result[out_field] = sum(
+                to_int(row[idx]) for row in rows[1:-1] if idx < len(row)
+            )
 
     return result
 
@@ -662,7 +680,7 @@ VIDEO_SOURCE_SPECS = (
     {
         "key": "instagram",
         "root": INSTAGRAM_DIR,
-        "filenames": ("videos.csv",),
+        "filenames": ("videos.xlsx", "videos.csv"),
         "id_aliases": ("shortcode",),
         "title_aliases": ("caption",),
         "fields": {

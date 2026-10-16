@@ -1,5 +1,6 @@
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
+import { setTimeout as delay } from 'node:timers/promises'
 import { createHash, randomUUID } from 'node:crypto'
 import { mkdir, readFile, writeFile, readdir, lstat, rm, rename } from 'node:fs/promises'
 import path from 'node:path'
@@ -45,7 +46,21 @@ export function sitePublisher(projectRoot) {
       throw fail(400, clean(error.stderr || error.message))
     }
   }
-  const git = args => run('git', ['-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-c', 'credential.helper=!gh auth git-credential', ...args])
+  // Avoid intermittent HTTP/2 framing failures on the GitHub transport path.
+  // Command-local configuration leaves the user's other repositories unchanged.
+  const git = args => run('git', ['-c', 'http.version=HTTP/1.1', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-c', 'credential.helper=!gh auth git-credential', ...args])
+  const gitNetwork = async args => {
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      assertActive()
+      try { return await git(args) } catch (error) {
+        assertActive()
+        const transient = /HTTP.?2.*(?:framing|stream)|curl (?:16|18|28|35|52|55|56|92)\b|connection (?:reset|timed out|closed)|could not resolve host|failed to connect|TLS connection.*terminated|remote end hung up|empty reply from server/i.test(error.message)
+        if (!transient || attempt === 3) throw error
+        await log(`Git 网络连接中断，${attempt * 2} 秒后重试（${attempt + 1}/3，HTTP/1.1）…`)
+        await delay(attempt * 2000, undefined, { signal: controller.signal })
+      }
+    }
+  }
   const github = async endpoint => JSON.parse(await run('gh', ['api', '--hostname', 'github.com', endpoint], projectRoot))
   async function persist() {
     if (disposed) return
@@ -123,7 +138,7 @@ export function sitePublisher(projectRoot) {
           await git(['remote', 'add', 'origin', REMOTE])
         }
         if ((await git(['remote', 'get-url', 'origin'])).trim() !== REMOTE) throw fail(409, '发布副本的远端地址不符，请检查 data/.site-publisher/repository。')
-        await git(['fetch', '--depth=1', 'origin', BRANCH])
+        await gitNetwork(['fetch', '--depth=1', 'origin', BRANCH])
         const remoteHead = (await git(['rev-parse', 'FETCH_HEAD'])).trim()
         // Only this generated checkout is reset; the developer checkout is never staged or reset.
         await git(['reset', '--hard', remoteHead])
@@ -159,7 +174,7 @@ export function sitePublisher(projectRoot) {
       try {
         await log('正在确认本地文件和远端版本仍与检查结果一致…')
         if ((await snapshot()).fingerprint !== captured.fingerprint) throw fail(409, '检查后本地文件发生变化，请重新检查发布内容。')
-        await git(['fetch', '--depth=1', 'origin', BRANCH])
+        await gitNetwork(['fetch', '--depth=1', 'origin', BRANCH])
         if ((await git(['rev-parse', 'FETCH_HEAD'])).trim() !== captured.remoteHead) throw fail(409, '远端已更新，请重新检查变更列表后再发布。')
         let baseline = 0
         try { baseline = (await github(`repos/${REPOSITORY}/actions/workflows/deploy.yml/runs?per_page=1`)).workflow_runs?.[0]?.id || 0 } catch { /* First publication can introduce the workflow. */ }
@@ -169,7 +184,8 @@ export function sitePublisher(projectRoot) {
           await git(['-c', 'commit.gpgSign=false', '-c', `user.name=${account.login}`, '-c', `user.email=${account.id}+${account.login}@users.noreply.github.com`, 'commit', '-m', commitMessage || `发布网站更新 ${new Date().toISOString()}`])
           job.sha = (await git(['rev-parse', 'HEAD'])).trim()
           await log('正在将提交推送到 GitHub main…')
-          await git(['push', 'origin', 'HEAD:refs/heads/main'])
+          // Retrying sends the same commit and ref; it never creates a new commit or force-pushes.
+          await gitNetwork(['push', 'origin', 'HEAD:refs/heads/main'])
           job.phase = 'pushed'
           job.pushedAt = new Date().toISOString()
           await log('源码已推送，等待 GitHub Actions 构建并部署网站。')

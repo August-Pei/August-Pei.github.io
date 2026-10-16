@@ -150,3 +150,7 @@ Cookie 仅写入 `data/.bilibili_cookie`，文件权限为仅当前用户读写�
 发布期间保持开发服务运行，后台刷新或切换页面后仍可继续查看进度。服务重启后已推送的任务可继续查询部署状态；未完成的准备 / 推送需重新检查，若已产生提交可先查看 Actions。GitHub 登录过期、网络错误和权限问题会显示在页面，无需在后台输入或保存访问令牌。
 
 推送自动部署的机制参见 [GitHub 官方部署说明](https://docs.github.com/en/get-started/start-your-journey/deploying-your-website-automatically)。本轮仅检查现有 GitHub 登录、仓库权限和 Pages 配置，未实际提交、推送、部署，也未运行本地构建或测试。
+
+### Git 网络连接异常
+
+发布模块通过命令级设置使用 HTTP/1.1，避免部分网络环境下的 `Error in the HTTP2 framing layer`。不改变其他仓库或全局 Git 配置。获取 / 推送时，明确的临时网络错误会自动重试最多三次，页面显示重试进度；权限或远端冲突不会自动重试。如三次仍失败，检查本机网络或代理，恢复后重新检查发布内容。

@@ -429,7 +429,7 @@ const snareCaseLayers = [
 const getStrengths = total => [
   { no: '01', title: '计算机 × 音乐', text: <>浙江大学计算机专业背景<br />专业第一与国家奖学金获得者<br />精通 AIGC 与大模型的原理与实践</>, tag: 'CS × MUSIC' },
   { no: '02', title: '流行音乐制作', text: <>具备完整拆解与重建欧美流行热单的实践经验<br />熟练使用 Logic Pro 与 Serum 合成器</>, tag: 'Production · Logic Pro' },
-  { no: '03', title: <>AIGC <span className="title-tail">音乐工作流</span></>, text: <>具备 Suno 音乐制作的经验<br />能将 AI Agent 融入音乐企划与制作流程</>, tag: 'Suno · AI Agent' },
+  { no: '03', title: <>AIGC <span className="title-tail">音乐工作流</span></>, text: <>具备 Suno 音乐制作的经验<br />从企划出发，确定风格与情绪，探索生成可能<br />通过局部精修与 DAW 制作，让创意成形</>, tag: 'Suno · AIGC' },
   { no: '04', title: '音乐内容运营', text: <>独立完成音乐内容的选题策划、制作、视觉与多平台分发<br />收获{formatMetric(total.views)}浏览与{formatMetric(total.engagement)}互动</>, tag: '策划 · 制作 · 分发' },
 ]
 
@@ -542,14 +542,15 @@ const strengthStories = [
     noteLink: { href: '#works', label: '聆听我的作品' }
   },
   {
-    no: '03', tone: 'lime', kicker: 'AIGC MUSIC WORKFLOW', title: <>让生成成为起点，<br/>而不是成品。</>,
-    lead: '我希望把 AIGC 放进完整的音乐企划与制作链路：先明确创作方向，再通过 Prompt 与生成工具探索素材，最后回到 DAW 中进行结构、音色与混音层面的二次制作。',
+    no: '03', tone: 'lime', kicker: 'AIGC MUSIC WORKFLOW', title: <>让审美决定方向，<br/>让 AI 拓展表达。</>,
+    lead: '从欧美流行音乐的风格趋势与情绪表达出发，确立创作概念与声音方向；以 Suno 探索词曲与编曲的多种可能，通过局部迭代打磨音乐细节；再使用 DAW 二次制作，深化声音表达，让创意最终成形。',
     points: [
-      { label: '01 · DIRECTION', value: '企划与 Prompt', text: '先定义情绪、风格、受众与参考坐标，让生成过程服务于明确的表达。' },
-      { label: '02 · GENERATION', value: 'Suno 探索', text: '快速比较旋律、编配和声音方向，筛选值得继续发展的创作素材。' },
-      { label: '03 · REBUILD', value: 'DAW 二次制作', text: '把生成结果带回制作工程，继续完成取舍、重构、混音与质量控制。' },
+      { label: '01 · CONCEPT & PROMPT', value: '企划与生成探索', text: '定义情绪、风格、受众与参考坐标；通过 Suno 生成、筛选词曲及编曲 demo，并持续迭代 prompt 探索风格可能' },
+      { label: '02 · REFINEMENT', value: 'AI 精修与优化', text: '运用 Region Replace 强化编曲层次，修正人声过度装饰；通过 Remaster 优化声音质感与整体连贯性' },
+      { label: '03 · REBUILD', value: 'DAW 二次制作', text: '基于 Suno 导出的 Stems，在 Logic Pro 中开展二次制作；重构合成器音色，通过织体叠加和动态自动化强化情绪递进' },
     ],
-    note: '这一部分目前作为工作流框架，后续可替换为完整项目案例与试听内容。'
+    note: '从生成探索到细节打磨，让创作意图贯穿音乐成形的每一步。',
+    noteLink: { href: '#works', label: '聆听我的 AI 音乐作品' }
   },
   {
     no: '04', tone: 'gray-two', kicker: 'MUSIC CONTENT OPERATION', title: <><span className="operation-title-line">社交媒体运营，</span><span className="operation-title-line">音乐被看见与回应。</span></>,
@@ -586,10 +587,10 @@ const educationStories = [
   },
   {
     no: '03', tone: 'black', kicker: 'CAMPUS LEADERSHIP', title: <>学生工作经历，<br/><span className="campus-title-line">协调于行负责于心。</span></>,
-    lead: '在浙江大学学生会“学生综合素质与管理中心”担任办公室部长，负责跨部门管理与协作，参与重大活动落地，包括学院新年晚会、杨华勇院士讲座等高规格活动。',
+    lead: '在浙江大学学生会“学生综合素质与管理中心”担任办公室部长，负责跨部门管理与协作，参与重大活动落地，包括新年晚会、杨华勇院士卓越论坛讲座等高规格活动。',
     points: [
       { label: 'ROLE', value: '办公室部长', text: '2021.09 — 2023.06，参与学生组织日常管理、跨部门协调，并承担大型活动的执行职责。' },
-      { label: 'EVENT COORDINATION', value: '4 部门 · 50+ 人', text: '统筹新年晚会物资、节目与流程，对接多部门工作人员与参演人员，保障活动零失误落地。' },
+      { label: 'EVENT COORDINATION', value: '4 部门 · 50+ 人', text: '统筹新年晚会的节目对接、流程管理与物资调配，对接多部门工作人员与参演人员，保障活动零失误落地。' },
       { label: 'CONTENT REVIEW', value: '新年晚会节目审核', text: '负责音乐类节目的筛选与审核，并协调入选节目的排练排期、设备需求与现场执行。' },
     ],
     image: studentWorkPhoto,
@@ -1713,7 +1714,7 @@ function App({ initialSocialData }) {
               </header>
               <div className="trend-heading">
                 <h3>持续追踪热点，<br/>读懂流行的变化。</h3>
-                <p>自 2022 年 10 月起持续研究欧美流行音乐与市场变化，把榜单、乐评、社交热度和歌曲制作放在同一张观察地图里。</p>
+                <p>自 2022 年 10 月起持续研究欧美流行音乐与市场变化，把榜单、乐评、社交热度和歌曲制作放在同一张观察地图里，积累艺人定位、音乐企划与全球化数字发行逻辑的综合认知</p>
               </div>
               <div className="story-points">
                 <div className="story-point"><span>CHARTS & REVIEWS</span><strong>榜单与口碑</strong><p>追踪 Billboard Hot 100、Spotify Global 榜单，关注 AOTY、Metacritic 等乐评聚合站，观察作品的市场表现与专业评价。</p></div>
